@@ -12,9 +12,10 @@ gem 'coffee-rails'
 gem 'turbolinks'
 gem 'jbuilder'
 gem 'sdoc', group: :doc
-gem "sqlite3"
-gem "puma"
-gem "bootsnap", require: false
+gem 'sqlite3'
+gem 'puma'
+gem 'bootsnap', require: false
+gem 'high_voltage'
 
 group :development, :test do
   gem 'byebug'
