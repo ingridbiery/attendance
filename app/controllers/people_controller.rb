@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
 
   def index
-    @people = @family.people.all.order(:dob)
+    @people = People.all
   end
 
   def show

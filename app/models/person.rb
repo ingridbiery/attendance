@@ -1,5 +1,6 @@
 class Person < ApplicationRecord
   belongs_to :family
+  self.implicit_order_column = 'dob'
 
   validates :first_name, presence: true,
                          length: { maximum: 30 }

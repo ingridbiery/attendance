@@ -1,0 +1,8 @@
+<tr id="belt-<%= belt.id %>">
+  <td><%= link_to belt.level, [@art, belt] %></td>
+  <td><%= belt.img %></td>
+  <td><%= belt.rank %></td>
+
+  <td><%= link_to 'Show', art_belt_path(@art, belt) %></td>
+  <td><%= link_to 'Edit', edit_art_belt_path(@art, belt) %></td>
+</tr>

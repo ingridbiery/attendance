@@ -1,0 +1,14 @@
+<h2><strong><%= @art.name %></strong> (<%= art.abbrev %>)</h2>
+
+<h3>Belts (<%= @art.belts.count %>)
+<%= link_to 'Add', new_art_belt_path(@art), title: "Add New belt to art" %></h3>
+<% if @art.belts.present? %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <%= render "belts/belt_header" %>
+      <tbody>
+        <%= render @art.belts %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

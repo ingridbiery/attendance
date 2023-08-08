@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  resources :families do
-    resources :people
+  resources :arts do
+    resources :belts, except: :index
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  resources :families do
+    resources :people, except: :index
+  end
+  get 'people' => 'people#index', as: :people
 
   # Defines the root path route ("/")
   root "home#index"

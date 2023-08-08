@@ -1,0 +1,32 @@
+<%= form_with(model: [@art, belt]) do |form| %>
+  <% if belt.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(belt.errors.count, "error") %> prohibited this belt from being saved:</h2>
+
+      <ul>
+        <% belt.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :level, style: "display: block" %>
+    <%= form.text_field :level %>
+  </div>
+
+  <div>
+    <%= form.label :img, style: "display: block" %>
+    <%= form.text_field :img %>
+  </div>
+
+  <div>
+    <%= form.label :rank, style: "display: block" %>
+    <%= form.text_field :rank %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
