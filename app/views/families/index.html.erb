@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @families.each do |family| %>
+        <tr>
+          <td><%= link_to family.name, family %></td>
+          <td><%= link_to 'Edit', edit_family_path(family) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to "New family", new_family_path %>

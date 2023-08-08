@@ -1,0 +1,14 @@
+<h2>The <strong><%= @family.name %></strong> Family</h2>
+
+<h3>People in Family (<%= @family.people.count %>)
+<%= link_to 'Add', new_family_person_path(@family), title: "Add New Person to Family" %></h3>
+<% if @family.people.present? %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <%= render "people/person_header" %>
+      <tbody>
+        <%= render @family.people %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

@@ -1,0 +1,7 @@
+<tr id="person-<%= person.id %>">
+  <td><%= link_to person.name, [@family, person] %></td>
+  <td><%= person.dob %></td>
+
+  <td><%= link_to 'Show', family_person_path(@family, person) %></td>
+  <td><%= link_to 'Edit', edit_family_person_path(@family, person) %></td>
+</tr>
