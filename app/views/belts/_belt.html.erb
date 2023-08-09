@@ -1,6 +1,10 @@
 <tr id="belt-<%= belt.id %>">
   <td><%= link_to belt.level, [@art, belt] %></td>
-  <td><%= belt.img %></td>
+  <td>
+    <% if belt.img %>
+      <%= image_tag(belt.img) %>
+    <% end %>
+  </td>
   <td><%= belt.rank %></td>
 
   <td><%= link_to 'Show', art_belt_path(@art, belt) %></td>

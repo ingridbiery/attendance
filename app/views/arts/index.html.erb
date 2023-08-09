@@ -15,7 +15,7 @@
     <tbody>
       <% @arts.each do |art| %>
         <tr>
-          <td><%= link_to art.name, art %></td>
+          <td><%= link_to "#{art.name} (#{art.abbrev})", art %></td>
           <td><%= link_to 'Edit', edit_art_path(art) %></td>
         </tr>
       <% end %>

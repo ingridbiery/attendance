@@ -1,4 +1,3 @@
-Person.destroy_all
 Family.destroy_all
 f = Family.create(name: "Banasiewicz");
 f.people.create(first_name: "Carolina", last_name: "Banasiewicz", dob: Date.new(1970, 8, 22));
@@ -16,3 +15,63 @@ f.people.create(first_name: "Justice", last_name: "Vozenilek", dob: Date.new(198
 f.people.create(first_name: "Mallory", last_name: "Protich", dob: Date.new(1984, 5, 18));
 f.people.create(first_name: "Quincy", last_name: "Protich", dob: Date.new(2007, 6, 17));
 f.people.create(first_name: "Tate", last_name: "Protich", dob: Date.new(2007, 8, 12));
+
+Art.destroy_all
+a = Art.create(name: "Taekwondo", abbrev: "TKD");
+a.belts.create(level: "8th Gup", rank: -8);
+a.belts.create(level: "7th Gup", rank: -7);
+a.belts.create(level: "6th Gup", rank: -6);
+a.belts.create(level: "5th Gup", rank: -5);
+a.belts.create(level: "4th Gup", rank: -4);
+a.belts.create(level: "3rd Gup", rank: -3);
+a.belts.create(level: "2nd Gup", rank: -2);
+a.belts.create(level: "1st Gup", rank: -1);
+a.belts.create(level: "Deputy Black Belt", rank: 0);
+a.belts.create(level: "1st Dan", rank: 1);
+a.belts.create(level: "2nd Dan", rank: 2);
+a.belts.create(level: "3rd Dan", rank: 3);
+a.belts.create(level: "4th Dan", rank: 4);
+
+a = Art.create(name: "Haidong Gumdo", abbrev: "HDG");
+a.belts.create(level: "8th Gup", rank: -8);
+a.belts.create(level: "7th Gup", rank: -7);
+a.belts.create(level: "6th Gup", rank: -6);
+a.belts.create(level: "5th Gup", rank: -5);
+a.belts.create(level: "4th Gup", rank: -4);
+a.belts.create(level: "3rd Gup", rank: -3);
+a.belts.create(level: "2nd Gup", rank: -2);
+a.belts.create(level: "1st Gup", rank: -1);
+a.belts.create(level: "Deputy Black Belt", rank: 0);
+a.belts.create(level: "1st Dan", rank: 1);
+a.belts.create(level: "2nd Dan", rank: 2);
+a.belts.create(level: "3rd Dan", rank: 3);
+a.belts.create(level: "4th Dan", rank: 4);
+
+a = Art.create(name: "Hapkido", abbrev: "HKD");
+a.belts.create(level: "8th Gup", rank: -8);
+a.belts.create(level: "7th Gup", rank: -7);
+a.belts.create(level: "6th Gup", rank: -6);
+a.belts.create(level: "5th Gup", rank: -5);
+a.belts.create(level: "4th Gup", rank: -4);
+a.belts.create(level: "3rd Gup", rank: -3);
+a.belts.create(level: "2nd Gup", rank: -2);
+a.belts.create(level: "1st Gup", rank: -1);
+a.belts.create(level: "1st Dan", rank: 1);
+a.belts.create(level: "2nd Dan", rank: 2);
+a.belts.create(level: "3rd Dan", rank: 3);
+a.belts.create(level: "4th Dan", rank: 4);
+
+a = Art.create(name: "Gongkwon Yusul", abbrev: "GKY");
+a.belts.create(level: "8th Gup", rank: -8);
+a.belts.create(level: "7th Gup", rank: -7);
+a.belts.create(level: "6th Gup", rank: -6);
+a.belts.create(level: "5th Gup", rank: -5);
+a.belts.create(level: "4th Gup", rank: -4);
+a.belts.create(level: "3rd Gup", rank: -3);
+a.belts.create(level: "2nd Gup", rank: -2);
+a.belts.create(level: "1st Gup", rank: -1);
+a.belts.create(level: "Deputy Black Belt", rank: 0);
+a.belts.create(level: "1st Dan", rank: 1);
+a.belts.create(level: "2nd Dan", rank: 2);
+a.belts.create(level: "3rd Dan", rank: 3);
+a.belts.create(level: "4th Dan", rank: 4);

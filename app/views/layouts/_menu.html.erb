@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-darkpa bg-dark">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -7,13 +7,15 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            People
+            Admin
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to 'Families', families_path, class: "dropdown-item" %>
+            <%= link_to 'People', people_path, class: "dropdown-item" %>
+            <%= link_to 'Arts', arts_path, class: "dropdown-item" %>
           </ul>
         </li>
-      </div>
+      </ul>
     </div>
   </div>
 </nav>

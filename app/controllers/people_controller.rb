@@ -1,9 +1,9 @@
 class PeopleController < ApplicationController
-  before_action :set_family
+  before_action :set_family, except: :index
   before_action :set_person, only: %i[ show edit update destroy ]
 
   def index
-    @people = People.all
+    @people = Person.all
   end
 
   def show

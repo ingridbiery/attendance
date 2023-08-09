@@ -3,6 +3,5 @@ class Belt < ApplicationRecord
   self.implicit_order_column = 'rank'
 
   validates :level, presence: true
-  validates :img, presence: true
   validates :rank, presence: true
 end
