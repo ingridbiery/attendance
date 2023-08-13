@@ -1,6 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @person %>
+<h1><%= @person.name %></h1>
+DOB: <%= @person.dob %>
+<ul>
+  <% for rank in @person.ranks %>
+    <li><%= rank.belt.art.abbrev %> <%= rank.belt.level %> <% if rank.belt.img %>
+      <%= image_tag(rank.belt.img, size: "120x47") %>
+    <% end %></li>
+  <% end %>
+</ul>
+
 
 <div>
   <%= link_to "Edit this person", edit_family_person_path([@family, @person]) %> |

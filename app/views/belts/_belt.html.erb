@@ -1,8 +1,8 @@
 <tr id="belt-<%= belt.id %>">
   <td><%= link_to belt.level, [@art, belt] %></td>
   <td>
-    <% if belt.img %>
-      <%= image_tag(belt.img) %>
+    <% if belt.img and File.exist?("app/assets/images/" + belt.img) %>
+      <%= image_tag(belt.img, size: "120x47") %>
     <% end %>
   </td>
   <td><%= belt.rank %></td>

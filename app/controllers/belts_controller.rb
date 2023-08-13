@@ -2,6 +2,9 @@ class BeltsController < ApplicationController
   before_action :set_art
   before_action :set_belt, only: %i[ show edit update destroy ]
 
+  # make sure image exists
+  before_action :image_exists, only: %i[create update]
+
   def show
   end
 
@@ -45,6 +48,13 @@ class BeltsController < ApplicationController
     # get the art from params before doing anything else
     def set_art
       @art = Art.find(params[:art_id])
+    end
+
+    # make sure the image exists, if an image file is given
+    def image_exists
+      if not File.exist?("app/assets/images/" + belt_params[:img])
+        redirect_to edit_art_belt_path
+      end
     end
 
     # Only allow a list of trusted parameters through.

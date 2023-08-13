@@ -1,6 +1,8 @@
 class Person < ApplicationRecord
   belongs_to :family
   self.implicit_order_column = 'dob'
+  has_many :ranks, dependent: :destroy
+  has_many :belts, through: :ranks
 
   validates :first_name, presence: true,
                          length: { maximum: 30 }
