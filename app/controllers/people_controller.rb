@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
 
   def index
-    @people = Person.all
+    @people = Person.all.includes(:family, :belts, :arts)
   end
 
   def show

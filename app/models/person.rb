@@ -3,6 +3,7 @@ class Person < ApplicationRecord
   self.implicit_order_column = 'dob'
   has_many :ranks, dependent: :destroy
   has_many :belts, through: :ranks
+  has_many :arts, through: :belts
 
   validates :first_name, presence: true,
                          length: { maximum: 30 }
