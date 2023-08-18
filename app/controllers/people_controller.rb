@@ -3,7 +3,12 @@ class PeopleController < ApplicationController
   before_action :set_person, only: %i[ show edit update destroy ]
 
   def index
-    @people = Person.all.includes(:family, :belts, :arts)
+    #@people = Person.includes(:family, :belts, :arts).joins(:arts).where("arts.abbrev" => "TKD")
+    #@people = Person.includes(:family, :belts, :arts)
+    @people = Hash.new
+    Art.all.each do |art|
+      @people[art] = art.people.includes(:family, :belts, :arts)
+    end
   end
 
   def show
