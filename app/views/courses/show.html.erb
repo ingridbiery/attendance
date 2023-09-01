@@ -1,4 +1,17 @@
-<%= render @course %>
+<h2><%= @course.day %></h2>
+
+<h3>Meetings (<%= @course.meetings.count %>)</h3>
+<% if @course.meetings.present? %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <%= render "meetings/meeting" %>
+      <tbody>
+        <%= render @course.meetings %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
 
 <div>
   <%= link_to "Edit this course", edit_art_course_path([@art, @course]) %> |
