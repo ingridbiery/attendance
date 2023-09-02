@@ -4,8 +4,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Abbrev</th>
+        <th>Name (Abbrev)</th>
         <th></th>
       </tr>
     </thead>
@@ -14,7 +13,7 @@
       <% @arts.each do |art| %>
         <tr>
           <td><%= link_to "#{art.name} (#{art.abbrev})", art %></td>
-          <td><%= link_to 'Edit', edit_art_path(art) %></td>
+          <td><%= link_to 'Edit Art', edit_art_path(art) %></td>
         </tr>
       <% end %>
     </tbody>

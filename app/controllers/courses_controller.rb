@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_art
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, except: %i[ new create ]
 
   def index
     @courses = @art.courses
@@ -40,10 +40,18 @@ class CoursesController < ApplicationController
     redirect_to @art, notice: "Course was successfully destroyed."
   end
 
+  # attendance for one class meeting
+  def attendance
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = Course.find(params[:id])
+      if params[:id]
+        @course = Course.find(params[:id])
+      else
+        @course = Course.find(params[:course_id])
+      end
     end
 
     # get the art from params before doing anything else

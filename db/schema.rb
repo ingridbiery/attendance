@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_21_032904) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_01_030428) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_032904) do
     t.string "abbrev"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "attends", force: :cascade do |t|
+    t.bigint "meeting_id", null: false
+    t.bigint "person_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_attends_on_meeting_id"
+    t.index ["person_id"], name: "index_attends_on_person_id"
   end
 
   create_table "belts", force: :cascade do |t|
@@ -74,6 +83,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_032904) do
     t.index ["person_id"], name: "index_ranks_on_person_id"
   end
 
+  add_foreign_key "attends", "meetings"
+  add_foreign_key "attends", "people"
   add_foreign_key "courses", "arts"
   add_foreign_key "meetings", "courses"
   add_foreign_key "ranks", "belts"

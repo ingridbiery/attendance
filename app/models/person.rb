@@ -4,7 +4,7 @@ class Person < ApplicationRecord
   has_many :ranks, dependent: :destroy
   has_many :belts, through: :ranks
   has_many :arts, through: :belts
-  has_many :attends
+  has_many :attends, dependent: :destroy
 
   validates :first_name, presence: true,
                          length: { maximum: 30 }

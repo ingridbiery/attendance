@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :arts do
     resources :belts, except: :index
-    resources :courses
+    resources :courses do
+      get :attendance
+    end
   end
 
   resources :families do
@@ -10,5 +12,5 @@ Rails.application.routes.draw do
   get 'people' => 'people#index', as: :people
 
   # Defines the root path route ("/")
-  root "home#index"
+  root "arts#index"
 end
