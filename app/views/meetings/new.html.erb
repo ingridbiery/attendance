@@ -1,0 +1,9 @@
+<h1>New meeting for <%= @art.abbrev %> <%= @course.day %></h1>
+
+<%= render "form", meeting: @meeting %>
+
+<br>
+
+<div>
+  <%= link_to "Back to course", [@art, @course] %>
+</div>

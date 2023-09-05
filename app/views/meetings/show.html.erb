@@ -1,0 +1,7 @@
+<h2><%= @meeting.date %></h2>
+
+<div>
+  <%= link_to "Back to course", [@art, @course] %>
+
+  <%= button_to "Destroy this meeting", [@art, @course, @meeting], method: :delete %>
+</div>

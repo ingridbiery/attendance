@@ -2,14 +2,9 @@
 
 <h3>Meetings (<%= @course.meetings.count %>)</h3>
 <% if @course.meetings.present? %>
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <%= render "meetings/meeting" %>
-      <tbody>
-        <%= render @course.meetings %>
-      </tbody>
-    </table>
-  </div>
+  <ul>
+    <%= render @course.meetings, course: @course %>
+  </ul>
 <% end %>
 
 

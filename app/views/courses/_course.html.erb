@@ -1,8 +1,13 @@
 <tr>
   <td><%= course.day %></td>
   <td><%= course.time %></td>
-
+  <td>Meetings <%= link_to 'New', new_art_course_meeting_path(@art, course) %>
+    <% if course.meetings.present? %>
+      <ul>
+        <%= render course.meetings, course: course %>
+      </ul>
+    <% end %>
+  </td>
   <td><%= link_to 'Show', art_course_path(@art, course) %></td>
-  <td><%= link_to 'Attendance', art_course_attendance_path(@art, course) %></td>
   <td><%= link_to 'Edit', edit_art_course_path(@art, course) %></td>
 </tr>

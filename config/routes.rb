@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :arts do
     resources :belts, except: :index
     resources :courses do
-      get :attendance
+      resources :meetings, only: [:new, :create, :show, :destroy]
     end
   end
 
