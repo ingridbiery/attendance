@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_art
-  before_action :set_course, except: %i[ new create ]
+  before_action :set_course, except: %i[ new create index ]
 
   def index
     @courses = @art.courses
@@ -28,7 +28,7 @@ class CoursesController < ApplicationController
 
   def update
     if @course.update(course_params)
-      redirect_to art_course_path(@course), notice: "Course was successfully updated."
+      redirect_to art_course_path(@art, @course), notice: "Course was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

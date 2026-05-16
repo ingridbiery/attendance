@@ -3,9 +3,9 @@
 
 <div id="courses">
   <% @courses.each do |course| %>
-    <%= render course %>
+    <%= render partial: "course", locals: { course: course, art: @art } %>
     <p>
-      <%= link_to "Show this course", course %>
+      <%= link_to "Show this course", art_course_path(@art, course) %>
     </p>
   <% end %>
 </div>

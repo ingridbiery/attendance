@@ -3,7 +3,8 @@ class BeltsController < ApplicationController
   before_action :set_belt, only: %i[ show edit update destroy ]
 
   # make sure image exists
-  before_action :image_exists, only: %i[create update]
+  before_action :image_exists_create, only: %i[ create ]
+  before_action :image_exists_update, only: %i[ update ]
 
   def show
   end
@@ -51,10 +52,27 @@ class BeltsController < ApplicationController
     end
 
     # make sure the image exists, if an image file is given
-    def image_exists
-      if not File.exist?("app/assets/images/" + belt_params[:img])
-        redirect_to edit_art_belt_path
+    def image_exists_create
+      unless image_exists
+        @belt = @art.belts.build(belt_params)  # so the form has the user’s input
+        flash.now[:alert] = "Image file not found"
+        render :new, status: :unprocessable_entity
+        return
       end
+    end
+    def image_exists_update
+      unless image_exists
+        redirect_to edit_art_belt_path(@art, @belt), alert: "Image file not found" and return
+      end
+    end
+
+    def image_exists
+      img = belt_params[:img]
+      return true if img.blank?
+
+      image_path = Rails.root.join("app/assets/images", img)
+
+      File.exist?(image_path)
     end
 
     # Only allow a list of trusted parameters through.

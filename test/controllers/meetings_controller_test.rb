@@ -2,47 +2,38 @@ require "test_helper"
 
 class MeetingsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @meeting = meetings(:one)
-  end
-
-  test "should get index" do
-    get meetings_url
-    assert_response :success
+    @art = create(:art)
+    @course = create(:course, art: @art)
+    @meeting = create(:meeting, course: @course, art: @art)
   end
 
   test "should get new" do
-    get new_meeting_url
+    get new_art_course_meeting_url(@art, @course)
     assert_response :success
   end
 
   test "should create meeting" do
+    meeting_params = attributes_for(:meeting, art: @art, course: @course)
+
     assert_difference("Meeting.count") do
-      post meetings_url, params: { meeting: { course_id: @meeting.course_id, date: @meeting.date } }
+      post art_course_meetings_url(@art, @course), params: {
+        meeting: meeting_params
+      }
     end
 
-    assert_redirected_to meeting_url(Meeting.last)
+    assert_redirected_to art_course_meeting_url(@art, @course, Meeting.last)
   end
 
   test "should show meeting" do
-    get meeting_url(@meeting)
+    get art_course_meeting_url(@art, @course, @meeting)
     assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_meeting_url(@meeting)
-    assert_response :success
-  end
-
-  test "should update meeting" do
-    patch meeting_url(@meeting), params: { meeting: { course_id: @meeting.course_id, date: @meeting.date } }
-    assert_redirected_to meeting_url(@meeting)
   end
 
   test "should destroy meeting" do
     assert_difference("Meeting.count", -1) do
-      delete meeting_url(@meeting)
+      delete art_course_meeting_url(@art, @course, @meeting)
     end
 
-    assert_redirected_to meetings_url
+    assert_redirected_to art_course_url(@art, @course)
   end
 end

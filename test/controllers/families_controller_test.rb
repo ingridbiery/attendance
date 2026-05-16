@@ -2,7 +2,7 @@ require "test_helper"
 
 class FamiliesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @family = families(:one)
+    @family = create(:family)
   end
 
   test "should get index" do
@@ -17,7 +17,11 @@ class FamiliesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create family" do
     assert_difference("Family.count") do
-      post families_url, params: { family: { name: @family.name } }
+      post families_url, params: {
+        family: {
+          name: "NewFamilyName"
+        }
+      }
     end
 
     assert_redirected_to family_url(Family.last)
@@ -34,7 +38,12 @@ class FamiliesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update family" do
-    patch family_url(@family), params: { family: { name: @family.name } }
+    patch family_url(@family), params: {
+      family: {
+        name: "UpdatedFamilyName"
+      }
+    }
+
     assert_redirected_to family_url(@family)
   end
 

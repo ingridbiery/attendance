@@ -2,47 +2,52 @@ require "test_helper"
 
 class PeopleControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @person = people(:one)
-  end
-
-  test "should get index" do
-    get people_url
-    assert_response :success
+    @family = create(:family)
+    @person = create(:person, family: @family)
   end
 
   test "should get new" do
-    get new_person_url
+    get new_family_person_url(@family)
     assert_response :success
   end
 
   test "should create person" do
+    person_params = attributes_for(:person, family: @family)
+
     assert_difference("Person.count") do
-      post people_url, params: { person: { dob: @person.dob, first_name: @person.first_name, last_name: @person.last_name } }
+      post family_people_url(@family), params: {
+        person: person_params
+      }
     end
 
-    assert_redirected_to person_url(Person.last)
+    assert_redirected_to family_person_url(@family, Person.order(:id).last)
   end
 
   test "should show person" do
-    get person_url(@person)
+    get family_person_url(@family, @person)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_person_url(@person)
+    get edit_family_person_url(@family, @person)
     assert_response :success
   end
 
   test "should update person" do
-    patch person_url(@person), params: { person: { dob: @person.dob, first_name: @person.first_name, last_name: @person.last_name } }
-    assert_redirected_to person_url(@person)
+    person_params = attributes_for(:person, family: @family)
+
+    patch family_person_url(@family, @person), params: {
+      person: person_params
+    }
+
+    assert_redirected_to family_person_url(@family, @person)
   end
 
   test "should destroy person" do
     assert_difference("Person.count", -1) do
-      delete person_url(@person)
+      delete family_person_url(@family, @person)
     end
 
-    assert_redirected_to people_url
+    assert_redirected_to family_url(@family)
   end
 end

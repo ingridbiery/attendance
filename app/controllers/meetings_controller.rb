@@ -15,7 +15,7 @@ class MeetingsController < ApplicationController
     @meeting = @course.meetings.build(meeting_params)
 
     if @meeting.save
-      redirect_to @art, notice: "Meeting was successfully created."
+      redirect_to [@art, @course, @meeting], notice: "Meeting was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
