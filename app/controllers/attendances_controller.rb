@@ -12,7 +12,7 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/new
   def new
-    @attend = Attendance.new
+    @attendance = Attendance.new
   end
 
   # GET /attendances/1/edit
@@ -21,10 +21,10 @@ class AttendancesController < ApplicationController
 
   # POST /attendances or /attendances.json
   def create
-    @attend = Attendance.new(attendance_params)
+    @attendance = Attendance.new(attendance_params)
 
     respond_to do |format|
-      if @attend.save
+      if @attendance.save
         format.html { redirect_to attendance_url(@attendance), notice: "Attendance was successfully created." }
         format.json { render :show, status: :created, location: @attendance }
       else
@@ -60,7 +60,7 @@ class AttendancesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_attendance
-      @attend = Attendance.find(params[:id])
+      @attendance = Attendance.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
