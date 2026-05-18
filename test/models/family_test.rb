@@ -1,7 +1,8 @@
 require "test_helper"
 
 class FamilyTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "valid family" do
+    family = build(:family)
+    assert family.valid?
+  end
 end
