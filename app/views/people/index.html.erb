@@ -23,7 +23,7 @@
             <td><%= person.dob %></td>
             <td><% person.belts.each do |belt| %>
               <% if belt.art == art %>
-                <div class="<%= belt.color %>"><%= belt.art.abbrev %> <%= belt.level %></div>
+                <div class="<%= belt.color %>"><%= belt.art.abbrev %> <%= belt.name %></div>
               <% end %>
             <% end %></td>
             <td><%= link_to 'Show', [person.family, person] %></td>

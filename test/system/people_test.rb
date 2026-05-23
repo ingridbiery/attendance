@@ -75,7 +75,7 @@ class PeopleTest < ApplicationSystemTestCase
     assert_current_path family_person_path(@family, @person)
     assert_selector "h1", text: @person.name
     assert_text "DOB: #{@person.dob}"
-    assert_text "#{@art.abbrev} #{@belt.level}"
+    assert_text "#{@art.abbrev} #{@belt.name}"
     assert_link "Edit this person", href: edit_family_person_path(@family, @person)
     assert_link "Back to family", href: family_path(@family)
   end
@@ -88,8 +88,8 @@ class PeopleTest < ApplicationSystemTestCase
     visit family_person_url(@family, @person)
 
     assert_current_path family_person_path(@family, @person)
-    assert_text "#{@art.abbrev} #{@belt.level}"
-    assert_text "#{art2.abbrev} #{belt2.level}"
+    assert_text "#{@art.abbrev} #{@belt.name}"
+    assert_text "#{art2.abbrev} #{belt2.name}"
   end
 
   test "destroying a person" do
