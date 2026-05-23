@@ -3,5 +3,7 @@
 <div>
   <%= link_to "Back to course", [@art, @course] %>
 
-  <%= button_to "Destroy this meeting", [@art, @course, @meeting], method: :delete %>
+  <%= button_to "Destroy this meeting", [@art, @course, @meeting],
+    method: :delete,
+    data: { turbo_confirm: "Are you sure?" } %>
 </div>
