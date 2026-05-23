@@ -1,3 +1,4 @@
+# test/system/families_test.rb
 require "application_system_test_case"
 
 class FamiliesTest < ApplicationSystemTestCase
@@ -8,36 +9,74 @@ class FamiliesTest < ApplicationSystemTestCase
   test "visiting the index" do
     visit families_url
 
+    assert_current_path families_path
     assert_selector "h1", text: "Families"
-    assert_text @family.name
-    assert_link "Edit"
-    assert_link "New family"
+    assert_link @family.name, href: family_path(@family)
+    assert_link "Edit", href: edit_family_path(@family)
+    assert_link "New family", href: new_family_path
   end
 
   test "creating a family" do
-    visit families_url
-    click_on "New family"
+    visit new_family_url
 
+    assert_current_path new_family_path
     assert_selector "h1", text: "New family"
 
     family_params = attributes_for(:family)
+
     fill_in "Name", with: family_params[:name]
     click_on "Create Family"
 
-    assert_text family_params[:name]
+    # put these first so we wait for the page to load before finding the id
+    assert_selector "h2", text: "The #{family_params[:name]} Family"
+    assert_selector "h3", text: "People in Family (0)"
+    new_family_id = current_path.split("/").last.to_i
+    new_family = Family.find(new_family_id)
+    assert_current_path family_path(new_family)
+    assert_link "Add", href: new_family_person_path(new_family)
+    assert_link "Edit", href: edit_family_path(new_family)
+    assert_link "Back to families", href: families_path
   end
 
   test "editing a family" do
-    visit families_url
-    click_on "Edit", match: :first
+    visit edit_family_url(@family)
 
+    assert_current_path edit_family_path(@family)
     assert_selector "h1", text: "Editing family"
 
     family_params = attributes_for(:family)
+
     fill_in "Name", with: family_params[:name]
     click_on "Update Family"
 
-    assert_text family_params[:name]
+    assert_current_path family_path(@family)
+    assert_selector "h2", text: "The #{family_params[:name]} Family"
+    assert_link "Edit", href: edit_family_path(@family)
+    assert_link "Back to families", href: families_path
+  end
+
+  test "show page renders family details" do
+    visit family_url(@family)
+
+    assert_current_path family_path(@family)
+    assert_selector "h2", text: "The #{@family.name} Family"
+    assert_selector "h3", text: "People in Family (0)"
+    assert_link "Add", href: new_family_person_path(@family)
+    assert_link "Edit", href: edit_family_path(@family)
+    assert_link "Back to families", href: families_path
+  end
+
+  test "show page renders people" do
+    person = create(:person, family: @family)
+
+    visit family_url(@family)
+
+    assert_current_path family_path(@family)
+    assert_selector "h3", text: "People in Family (1)"
+    assert_link person.name, href: family_person_path(@family, person)
+    assert_text person.dob.to_s
+    assert_link "Show", href: family_person_path(@family, person)
+    assert_link "Edit", href: edit_family_person_path(@family, person)
   end
 
   test "destroying a family" do
@@ -48,16 +87,9 @@ class FamiliesTest < ApplicationSystemTestCase
     end
 
     assert_current_path families_path
+    assert_selector "h1", text: "Families"
     within("table") do
       assert_no_text @family.name
     end
-  end
-
-  test "show page renders family details" do
-    visit family_url(@family)
-
-    assert_text @family.name
-    assert_link "Edit"
-    assert_link "Back to families"
   end
 end
