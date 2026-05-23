@@ -20,7 +20,7 @@ class BeltsController < ApplicationController
     @belt = @art.belts.build(belt_params)
 
     if @belt.save
-      redirect_to art_belt_path(@art, @belt), notice: "#{@belt.level} was successfully created."
+      redirect_to art_belt_path(@art, @belt), notice: "#{@belt.name} was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class BeltsController < ApplicationController
 
   def update
     if @belt.update(belt_params)
-      redirect_to art_belt_path(@art, @belt), notice: "#{@belt.level} was successfully updated."
+      redirect_to art_belt_path(@art, @belt), notice: "#{@belt.name} was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -37,7 +37,7 @@ class BeltsController < ApplicationController
   def destroy
     @belt.destroy
 
-    redirect_to @art, notice: "#{@belt.level} was successfully destroyed."
+    redirect_to @art, notice: "#{@belt.name} was successfully destroyed."
   end
 
   private
@@ -77,6 +77,6 @@ class BeltsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def belt_params
-      params.require(:belt).permit(:art_id, :level, :img, :rank)
+      params.require(:belt).permit(:art_id, :name, :img, :level)
     end
 end

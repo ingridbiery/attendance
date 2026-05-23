@@ -95,8 +95,8 @@ class ArtsTest < ApplicationSystemTestCase
 
     assert_current_path art_path(@art)
     assert_selector "h3", text: "Belts (1)"
-    assert_link belt.level, href: art_belt_path(@art, belt)
-    assert_text belt.rank.to_s
+    assert_link belt.name, href: art_belt_path(@art, belt)
+    assert_text belt.level.to_s
     assert_link "Show", href: art_belt_path(@art, belt)
     assert_link "Edit", href: edit_art_belt_path(@art, belt)
   end

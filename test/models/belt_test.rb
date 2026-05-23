@@ -9,13 +9,13 @@ class BeltTest < ActiveSupport::TestCase
     assert @belt.valid?
   end
 
-  test "requires level" do
-    @belt.level = ""
+  test "requires name" do
+    @belt.name = ""
     assert_not @belt.valid?
   end
 
-  test "requires rank" do
-    @belt.rank = nil
+  test "requires level" do
+    @belt.level = nil
     assert_not @belt.valid?
   end
 

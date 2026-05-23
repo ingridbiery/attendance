@@ -1,11 +1,11 @@
 <tr id="belt-<%= belt.id %>">
-  <td><%= link_to belt.level, [@art, belt] %></td>
+  <td><%= link_to belt.name, [@art, belt] %></td>
   <td>
     <% if belt.img and File.exist?("app/assets/images/" + belt.img) %>
       <%= image_tag(belt.img, size: "120x47") %>
     <% end %>
   </td>
-  <td><%= belt.rank %></td>
+  <td><%= belt.level %></td>
 
   <td><%= link_to 'Show', art_belt_path(@art, belt) %></td>
   <td><%= link_to 'Edit', edit_art_belt_path(@art, belt) %></td>
