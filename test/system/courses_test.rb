@@ -7,7 +7,7 @@ class CoursesTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    visit art_courses_path(@art)
+    visit art_courses_url(@art)
 
     assert_selector "h1", text: "Courses"
     assert_text @course.day
@@ -17,7 +17,7 @@ class CoursesTest < ApplicationSystemTestCase
   end
 
   test "creating a course" do
-    visit art_courses_path(@art)
+    visit art_courses_url(@art)
 
     within("#add-course") do
       click_on "Add"
@@ -38,7 +38,7 @@ class CoursesTest < ApplicationSystemTestCase
   end
 
   test "editing a course" do
-    visit art_course_path(@art, @course)
+    visit art_course_url(@art, @course)
     click_on "Edit this course"
 
     assert_selector "h1", text: "Editing course"
@@ -56,14 +56,14 @@ class CoursesTest < ApplicationSystemTestCase
   test "show page displays meetings count" do
     meeting = create(:meeting, course: @course)
 
-    visit art_course_path(@art, @course)
+    visit art_course_url(@art, @course)
 
     assert_selector "h3", text: "Meetings (1)"
     assert_text meeting.date.to_s
   end
 
   test "index page shows meetings link" do
-    visit art_courses_path(@art)
+    visit art_courses_url(@art)
 
     within("#courses") do
       assert_link "New", href: new_art_course_meeting_path(@art, @course)
@@ -71,7 +71,7 @@ class CoursesTest < ApplicationSystemTestCase
   end
 
   test "destroying a course" do
-    visit art_course_path(@art, @course)
+    visit art_course_url(@art, @course)
 
     accept_confirm do
       click_on "Destroy this course"
