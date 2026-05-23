@@ -1,43 +1,52 @@
+# test/system/meetings_test.rb
 require "application_system_test_case"
 
 class MeetingsTest < ApplicationSystemTestCase
   setup do
-    @meeting = meetings(:one)
+    @art = create(:art)
+    @course = create(:course, art: @art)
+    @meeting = create(:meeting, course: @course)
   end
 
-  test "visiting the index" do
-    visit meetings_url
-    assert_selector "h1", text: "Meetings"
-  end
+  test "creating a meeting" do
+    visit art_courses_url(@art)
 
-  test "should create meeting" do
-    visit meetings_url
-    click_on "New meeting"
+    click_link "New", href: new_art_course_meeting_path(@art, @course)
 
-    fill_in "Course", with: @meeting.course_id
-    fill_in "Date", with: @meeting.date
+    assert_current_path new_art_course_meeting_path(@art, @course)
+    assert_selector "h1", text: "New meeting for #{@art.abbrev} #{@course.day}"
+    assert_link "Back to course", href: art_course_path(@art, @course)
+
+    meeting_params = attributes_for(:meeting)
+
+    find("#meeting_date").send_keys(meeting_params[:date].strftime("%m%d%Y"))
     click_on "Create Meeting"
 
-    assert_text "Meeting was successfully created"
-    click_on "Back"
+    # put these first so we wait for the page to load before finding the id
+    assert_selector "h2", text: meeting_params[:date].to_s
+    new_meeting_id = current_path.split("/").last.to_i
+    new_meeting = Meeting.find(new_meeting_id)
+    assert_current_path art_course_meeting_path(@art, @course, new_meeting)
+    assert_link "Back to course", href: art_course_path(@art, @course)
   end
 
-  test "should update Meeting" do
-    visit meeting_url(@meeting)
-    click_on "Edit this meeting", match: :first
+  test "show page renders meeting details" do
+    visit art_course_meeting_url(@art, @course, @meeting)
 
-    fill_in "Course", with: @meeting.course_id
-    fill_in "Date", with: @meeting.date
-    click_on "Update Meeting"
-
-    assert_text "Meeting was successfully updated"
-    click_on "Back"
+    assert_current_path art_course_meeting_path(@art, @course, @meeting)
+    assert_selector "h2", text: @meeting.date.to_s
+    assert_link "Back to course", href: art_course_path(@art, @course)
   end
 
-  test "should destroy Meeting" do
-    visit meeting_url(@meeting)
-    click_on "Destroy this meeting", match: :first
+  test "destroying a meeting" do
+    visit art_course_meeting_url(@art, @course, @meeting)
 
-    assert_text "Meeting was successfully destroyed"
+    accept_confirm do
+      click_on "Destroy this meeting"
+    end
+
+    assert_current_path art_course_path(@art, @course)
+    assert_selector "h3", text: "Meetings (0)"
+    assert_no_text @meeting.date.to_s
   end
 end

@@ -10,8 +10,10 @@ DOB: <%= @person.dob %>
 
 
 <div>
-  <%= link_to "Edit this person", edit_family_person_path([@family, @person]) %> |
+  <%= link_to "Edit this person", edit_family_person_path(@family, @person) %> |
   <%= link_to "Back to family", @family %>
 
-  <%= button_to "Destroy this person", [@family, @person], method: :delete %>
+  <%= button_to "Destroy this person", [@family, @person],
+      method: :delete,
+      data: { turbo_confirm: "Are you sure?" } %>
 </div>

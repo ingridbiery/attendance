@@ -3,4 +3,6 @@
 <%= link_to "Edit", edit_art_path(@art) %> |
 <%= link_to "Back to arts", arts_path %>
 
-<%= button_to "Destroy this art", @art, method: :delete %>
+<%= button_to "Destroy this art", @art,
+      method: :delete,
+      data: { turbo_confirm: "Are you sure?" } %>

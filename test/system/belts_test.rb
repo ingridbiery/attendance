@@ -1,43 +1,80 @@
+# test/system/belts_test.rb
 require "application_system_test_case"
 
 class BeltsTest < ApplicationSystemTestCase
   setup do
-    @belt = belts(:one)
+    @art = create(:art)
+    @belt = create(:belt, art: @art)
   end
 
-  test "visiting the index" do
-    visit belts_url
-    assert_selector "h1", text: "Belts"
-  end
+  test "creating a belt" do
+    visit new_art_belt_url(@art)
 
-  test "should create belt" do
-    visit belts_url
-    click_on "New belt"
+    assert_current_path new_art_belt_path(@art)
+    assert_selector "h1", text: "New belt"
+    assert_link "Back to art", href: art_path(@art)
 
-    fill_in "Img", with: @belt.img
-    fill_in "Level", with: @belt.level
+    belt_params = attributes_for(:belt)
+
+    fill_in "Level", with: belt_params[:level]
+    fill_in "Rank", with: belt_params[:rank]
+    fill_in "Img", with: ""
     click_on "Create Belt"
 
-    assert_text "Belt was successfully created"
-    click_on "Back"
+    # put these first so we wait for the page to load before finding the id
+    assert_text belt_params[:rank].to_s
+    new_belt_id = current_path.split("/").last.to_i
+    new_belt = Belt.find(new_belt_id)
+    assert_current_path art_belt_path(@art, new_belt)
+    assert_link belt_params[:level], href: art_belt_path(@art, new_belt)
+    assert_link "Edit this belt", href: edit_art_belt_path(@art, new_belt)
+    assert_link "Back to art", href: art_path(@art)
   end
 
-  test "should update Belt" do
-    visit belt_url(@belt)
-    click_on "Edit this belt", match: :first
+  test "editing a belt" do
+    visit edit_art_belt_url(@art, @belt)
 
-    fill_in "Img", with: @belt.img
-    fill_in "Level", with: @belt.level
+    assert_current_path edit_art_belt_path(@art, @belt)
+    assert_selector "h1", text: "Editing belt"
+    assert_link "Show this belt", href: art_belt_path(@art, @belt)
+    assert_link "Back to art", href: art_path(@art)
+
+    belt_params = attributes_for(:belt)
+
+    fill_in "Level", with: belt_params[:level]
+    fill_in "Rank", with: belt_params[:rank]
+    fill_in "Img", with: ""
     click_on "Update Belt"
 
-    assert_text "Belt was successfully updated"
-    click_on "Back"
+    # put these first so we wait for the page to load before finding the id
+    assert_link belt_params[:level], href: art_belt_path(@art, @belt)
+    assert_text belt_params[:rank].to_s
+    assert_current_path art_belt_path(@art, @belt)
+    assert_link "Edit this belt", href: edit_art_belt_path(@art, @belt)
+    assert_link "Back to art", href: art_path(@art)
   end
 
-  test "should destroy Belt" do
-    visit belt_url(@belt)
-    click_on "Destroy this belt", match: :first
+  test "show page renders belt details" do
+    visit art_belt_url(@art, @belt)
 
-    assert_text "Belt was successfully destroyed"
+    # put these first so we wait for the page to load before finding the id
+    assert_link @belt.level, href: art_belt_path(@art, @belt)
+    assert_text @belt.rank.to_s
+    assert_current_path art_belt_path(@art, @belt)
+    assert_link "Edit this belt", href: edit_art_belt_path(@art, @belt)
+    assert_link "Back to art", href: art_path(@art)
+  end
+
+  test "destroying a belt" do
+    visit art_belt_url(@art, @belt)
+
+    accept_confirm do
+      click_on "Destroy this belt"
+    end
+
+    # put these first so we wait for the page to load before finding the id
+    assert_text "#{@belt.level} was successfully destroyed"
+    assert_current_path art_path(@art)
+    assert_selector "h3", text: "Belts (0)"
   end
 end

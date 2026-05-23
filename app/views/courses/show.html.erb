@@ -1,4 +1,4 @@
-<h2><%= @course.day %></h2>
+<h2><%= @course.day %> <%= @course.time.strftime("%I:%M %p") %></h2>
 
 <h3>Meetings (<%= @course.meetings.count %>)</h3>
 <% if @course.meetings.present? %>
@@ -9,8 +9,10 @@
 
 
 <div>
-  <%= link_to "Edit this course", edit_art_course_path([@art, @course]) %> |
+  <%= link_to "Edit this course", edit_art_course_path(@art, @course) %> |
   <%= link_to "Back to art", @art %>
 
-  <%= button_to "Destroy this course", [@art, @course], method: :delete %>
+  <%= button_to "Destroy this course", [@art, @course],
+      method: :delete,
+      data: { turbo_confirm: "Are you sure?" } %> %>
 </div>

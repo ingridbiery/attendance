@@ -1,9 +1,11 @@
 <h1>Courses</h1>
-<%= link_to 'Add', new_art_course_path(@art), title: "Add New course to art" %></h3>
+<div id="add-course">
+  <%= link_to 'Add', new_art_course_path(@art), title: "Add New course to art" %></h3>
+</div>
 
 <div id="courses">
   <% @courses.each do |course| %>
-    <%= render partial: "course", locals: { course: course, art: @art } %>
+    <%= render partial: "course", locals: { course: course } %>
     <p>
       <%= link_to "Show this course", art_course_path(@art, course) %>
     </p>

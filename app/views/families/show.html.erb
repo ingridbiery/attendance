@@ -3,4 +3,6 @@
 <%= link_to "Edit", edit_family_path(@family) %> |
 <%= link_to "Back to families", families_path %>
 
-<%= button_to "Destroy this family", @family, method: :delete %>
+<%= button_to "Destroy this family", @family,
+    method: :delete,
+    data: { turbo_confirm: "Are you sure?" } %>
