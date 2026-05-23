@@ -2,42 +2,66 @@ require "application_system_test_case"
 
 class BeltsTest < ApplicationSystemTestCase
   setup do
-    @belt = belts(:one)
+    @art = create(:art)
+    @belt = create(:belt, art: @art)
   end
 
-  test "visiting the index" do
-    visit belts_url
-    assert_selector "h1", text: "Belts"
-  end
+  test "creating a belt" do
+    visit art_url(@art)
 
-  test "should create belt" do
-    visit belts_url
-    click_on "New belt"
+    # The "Add" link next to Belts
+    within("h3", text: "Belts") do
+      click_on "Add"
+    end
+    
+    belt_params = attributes_for(:belt)
 
-    fill_in "Img", with: @belt.img
-    fill_in "Level", with: @belt.level
+    fill_in "Level", with: belt_params[:level]
+    fill_in "Img", with: belt_params[:img]
+    fill_in "Rank", with: belt_params[:rank]
     click_on "Create Belt"
 
-    assert_text "Belt was successfully created"
-    click_on "Back"
+    assert_text belt_params[:level]
+    assert_text belt_params[:rank]
+    assert_link "Back to art"
   end
 
-  test "should update Belt" do
-    visit belt_url(@belt)
-    click_on "Edit this belt", match: :first
+  test "showing a belt" do
+    visit art_url(@art)
 
-    fill_in "Img", with: @belt.img
-    fill_in "Level", with: @belt.level
+    click_on @belt.level
+
+    assert_text @belt.level
+    assert_text @belt.rank
+    assert_link "Edit this belt"
+    assert_link "Back to art"
+  end
+
+  test "updating a belt" do
+    visit art_belt_url(@art, @belt)
+
+    click_on "Edit this belt"
+
+    belt_params = attributes_for(:belt)
+
+    fill_in "Level", with: belt_params[:level]
+    fill_in "Img", with: belt_params[:img]
+    fill_in "Rank", with: belt_params[:rank]
     click_on "Update Belt"
 
-    assert_text "Belt was successfully updated"
-    click_on "Back"
+    assert_text belt_params[:level]
+    assert_text belt_params[:rank]
   end
 
-  test "should destroy Belt" do
-    visit belt_url(@belt)
-    click_on "Destroy this belt", match: :first
+  test "destroying a belt" do
+    visit art_belt_url(@art, @belt)
 
-    assert_text "Belt was successfully destroyed"
+    accept_confirm do
+      click_on "Destroy this belt"
+    end
+
+    # After destroy, user returns to the Art show page
+    assert_current_path art_path(@art)
+    assert_no_selector "#belt-#{@belt.id}"
   end
 end
