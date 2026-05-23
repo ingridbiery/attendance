@@ -1,7 +1,7 @@
 <%= render @belt %>
 
 <div>
-  <%= link_to "Edit this belt", edit_art_belt_path([@art, @belt]) %> |
+  <%= link_to "Edit this belt", edit_art_belt_path(@art, @belt) %> |
   <%= link_to "Back to art", @art %>
 
   <%= button_to "Destroy this belt", [@art, @belt], 
