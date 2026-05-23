@@ -50,7 +50,6 @@ class BeltsTest < ApplicationSystemTestCase
     assert_link belt_params[:level], href: art_belt_path(@art, @belt)
     assert_text belt_params[:rank].to_s
     assert_current_path art_belt_path(@art, @belt)
-    puts find_link("Edit this belt")[:href]
     assert_link "Edit this belt", href: edit_art_belt_path(@art, @belt)
     assert_link "Back to art", href: art_path(@art)
   end
@@ -62,7 +61,6 @@ class BeltsTest < ApplicationSystemTestCase
     assert_link @belt.level, href: art_belt_path(@art, @belt)
     assert_text @belt.rank.to_s
     assert_current_path art_belt_path(@art, @belt)
-    puts find_link("Edit this belt")[:href]
     assert_link "Edit this belt", href: edit_art_belt_path(@art, @belt)
     assert_link "Back to art", href: art_path(@art)
   end
