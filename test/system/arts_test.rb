@@ -29,11 +29,10 @@ class ArtsTest < ApplicationSystemTestCase
     fill_in "Abbrev", with: art_params[:abbrev]
     click_on "Create Art"
 
-    # put these first so we wait for the page to load
+    # put these first so we wait for the page to load before finding the id
     assert_selector "h2", text: "#{art_params[:name]} (#{art_params[:abbrev]})"
     assert_selector "h3", text: "Courses (0)"
     assert_selector "h3", text: "Belts (0)"
-    puts current_path
     new_art_id = current_path.split("/").last.to_i
     new_art = Art.find(new_art_id)
     assert_current_path art_path(new_art)
