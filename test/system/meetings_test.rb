@@ -22,12 +22,22 @@ class MeetingsTest < ApplicationSystemTestCase
     find("#meeting_date").send_keys(meeting_params[:date].strftime("%m%d%Y"))
     click_on "Create Meeting"
 
-    # put these first so we wait for the page to load before finding the id
+    # wait for redirect before reading path
     assert_selector "h2", text: meeting_params[:date].to_s
-    new_meeting_id = current_path.split("/").last.to_i
+    new_meeting_id = current_path.match(/\/meetings\/(\d+)/)[1].to_i
     new_meeting = Meeting.find(new_meeting_id)
     assert_current_path art_course_meeting_path(@art, @course, new_meeting)
     assert_link "Back to course", href: art_course_path(@art, @course)
+  end
+
+  test "creating a meeting without a date shows an error" do
+    visit new_art_course_meeting_url(@art, @course)
+
+    # don't fill in date
+    click_on "Create Meeting"
+
+    assert_current_path art_course_meetings_path(@art, @course)
+    assert_text "Date can't be blank"
   end
 
   test "show page renders meeting details" do
@@ -47,6 +57,6 @@ class MeetingsTest < ApplicationSystemTestCase
 
     assert_current_path art_course_path(@art, @course)
     assert_selector "h3", text: "Meetings (0)"
-    assert_no_text @meeting.date.to_s
+    assert_text "Meeting was successfully destroyed"
   end
 end

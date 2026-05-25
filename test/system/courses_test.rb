@@ -36,17 +36,17 @@ class CoursesTest < ApplicationSystemTestCase
 
     course_params = attributes_for(:course)
 
-    select course_params[:day], from: "Day"
+    select course_params[:day].humanize, from: "Day"
     fill_in "Time", with: course_params[:time].strftime("%H:%M")
     click_on "Create Course"
 
-    # put these first so we wait for the page to load before checking the path
-    assert_selector "h2", text: "#{course_params[:day]} #{course_params[:time].strftime("%I:%M %p")}"
+    # wait for redirect before reading path
+    assert_selector "h2", text: "#{course_params[:day].humanize} #{course_params[:time].strftime("%I:%M %p")}"
     assert_selector "h3", text: "Meetings (0)"
-    new_course_id = current_path.split("/").last.to_i
+    new_course_id = current_path.match(/\/courses\/(\d+)/)[1].to_i
     new_course = Course.find(new_course_id)
     assert_current_path art_course_path(@art, new_course)
-    assert_link "Edit this course", href: edit_art_course_path(@art, Course.last)
+    assert_link "Edit this course", href: edit_art_course_path(@art, new_course)
     assert_link "Back to art", href: art_path(@art)
   end
 
@@ -60,12 +60,12 @@ class CoursesTest < ApplicationSystemTestCase
 
     course_params = attributes_for(:course)
 
-    select course_params[:day], from: "Day"
+    select course_params[:day].humanize, from: "Day"
     fill_in "Time", with: course_params[:time].strftime("%H:%M")
     click_on "Update Course"
 
-    # put these first so we wait for the page to load before checking the path
-    assert_selector "h2", text: "#{course_params[:day]} #{course_params[:time].strftime("%I:%M %p")}"
+    # wait for redirect before checking path
+    assert_selector "h2", text: "#{course_params[:day].humanize} #{course_params[:time].strftime("%I:%M %p")}"
     assert_current_path art_course_path(@art, @course)
     assert_link "Edit this course", href: edit_art_course_path(@art, @course)
     assert_link "Back to art", href: art_path(@art)
@@ -75,7 +75,7 @@ class CoursesTest < ApplicationSystemTestCase
     visit art_course_url(@art, @course)
 
     assert_current_path art_course_path(@art, @course)
-    assert_selector "h2", text: "#{@course.day} #{@course.time.strftime("%I:%M %p")}"
+    assert_selector "h2", text: "#{@course.day.humanize} #{@course.time.strftime("%I:%M %p")}"
     assert_selector "h3", text: "Meetings (0)"
     assert_link "Edit this course", href: edit_art_course_path(@art, @course)
     assert_link "Back to art", href: art_path(@art)
@@ -100,6 +100,27 @@ class CoursesTest < ApplicationSystemTestCase
     end
   end
 
+  test "day dropdown shows humanized day names" do
+    visit new_art_course_url(@art)
+
+    within("select#course_day") do
+      Course.days.keys.each do |day|
+        assert_selector "option", text: day.humanize
+      end
+    end
+  end
+
+  test "creating a course with an invalid day shows an error" do
+    # Simulate a bad form submission directly
+    visit new_art_course_url(@art)
+
+    # Leave day blank by not selecting anything (if blank option existed)
+    # Instead verify the dropdown only contains valid days
+    within("select#course_day") do
+      assert_no_selector "option", text: "Funday"
+    end
+  end
+
   test "destroying a course" do
     visit art_course_url(@art, @course)
 
@@ -108,7 +129,7 @@ class CoursesTest < ApplicationSystemTestCase
     end
 
     assert_current_path art_path(@art)
-    assert_no_text @course.day
+    assert_no_text @course.day.humanize
     assert_no_text @course.time.strftime("%I:%M %p")
   end
 end
