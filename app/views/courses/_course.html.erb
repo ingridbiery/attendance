@@ -1,5 +1,5 @@
 <tr>
-  <td><%= course.day %></td>
+  <td><%= course.day.humanize %></td>
   <td><%= course.time&.strftime("%I:%M %p") %></td>
   <td>Meetings <%= link_to 'New', new_art_course_meeting_path(@art, course) %>
     <% if course.meetings.present? %>

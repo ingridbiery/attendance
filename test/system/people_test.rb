@@ -30,16 +30,18 @@ class PeopleTest < ApplicationSystemTestCase
     assert_selector "h1", text: "New person"
     assert_link "Back to family", href: family_path(@family)
 
-    person_params = attributes_for(:person)
+    first = "First"
+    last = "Last"
+    dob = Date.today()-4
 
-    fill_in "First name", with: person_params[:first_name]
-    fill_in "Last name", with: person_params[:last_name]
-    find("#person_dob").send_keys(person_params[:dob].strftime("%m%d%Y"))
+    fill_in "First name", with: first
+    fill_in "Last name", with: last
+    find("#person_dob").send_keys(dob.strftime("%m%d%Y"))
     click_on "Create Person"
 
     # put these first so we wait for the page to load before finding the id
-    assert_selector "h1", text: "#{person_params[:first_name]} #{person_params[:last_name]}"
-    assert_text "DOB: #{person_params[:dob]}"
+    assert_selector "h1", text: "#{first} #{last}"
+    assert_text "DOB: #{dob}"
     new_person_id = current_path.split("/").last.to_i
     new_person = Person.find(new_person_id)
     assert_current_path family_person_path(@family, new_person_id)
@@ -55,16 +57,18 @@ class PeopleTest < ApplicationSystemTestCase
     assert_link "Show this person", href: family_person_path(@family, @person)
     assert_link "Back to family", href: family_path(@family)
 
-    person_params = attributes_for(:person)
+    first = "NewFirst"
+    last = "NewLast"
+    dob = Date.today()-15
 
-    fill_in "First name", with: person_params[:first_name]
-    fill_in "Last name", with: person_params[:last_name]
-    find("#person_dob").send_keys(person_params[:dob].strftime("%m%d%Y"))
+    fill_in "First name", with: first
+    fill_in "Last name", with: last
+    find("#person_dob").send_keys(dob.strftime("%m%d%Y"))
     click_on "Update Person"
 
     assert_current_path family_person_path(@family, @person)
-    assert_selector "h1", text: "#{person_params[:first_name]} #{person_params[:last_name]}"
-    assert_text "DOB: #{person_params[:dob]}"
+    assert_selector "h1", text: "#{first} #{last}"
+    assert_text "DOB: #{dob}"
     assert_link "Edit this person", href: edit_family_person_path(@family, @person)
     assert_link "Back to family", href: family_path(@family)
   end
@@ -99,10 +103,11 @@ class PeopleTest < ApplicationSystemTestCase
       click_on "Destroy this person"
     end
 
-    assert_current_path family_path(@family)
+    # wait for redirect before reading path
     assert_selector "h3", text: "People in Family (0)"
     within("table") do
       assert_no_text @person.name
     end rescue assert_no_selector "table"
+    assert_current_path family_path(@family)
   end
 end

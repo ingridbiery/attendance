@@ -34,14 +34,15 @@ class CoursesTest < ApplicationSystemTestCase
     assert_text @art.name
     assert_link "Back to art", href: art_path(@art)
 
-    course_params = attributes_for(:course)
+    day = "Wednesday"
+    time = Time.zone.parse("12:32 AM")
 
-    select course_params[:day].humanize, from: "Day"
-    fill_in "Time", with: course_params[:time].strftime("%H:%M")
+    select day, from: "Day"
+    find("#course_time").send_keys(time.strftime("%I%M%p"))
     click_on "Create Course"
 
     # wait for redirect before reading path
-    assert_selector "h2", text: "#{course_params[:day].humanize} #{course_params[:time].strftime("%I:%M %p")}"
+    assert_selector "h2", text: "#{day} #{time.strftime("%I:%M %p")}"
     assert_selector "h3", text: "Meetings (0)"
     new_course_id = current_path.match(/\/courses\/(\d+)/)[1].to_i
     new_course = Course.find(new_course_id)
@@ -58,14 +59,15 @@ class CoursesTest < ApplicationSystemTestCase
     assert_link "Show this course", href: art_course_path(@art, @course)
     assert_link "Back to art", href: art_path(@art)
 
-    course_params = attributes_for(:course)
+    day = "Monday"
+    time = Time.zone.parse("9:05")
 
-    select course_params[:day].humanize, from: "Day"
-    fill_in "Time", with: course_params[:time].strftime("%H:%M")
+    select day, from: "Day"
+    find("#course_time").send_keys(time.strftime("%I%M%p"))
     click_on "Update Course"
 
     # wait for redirect before checking path
-    assert_selector "h2", text: "#{course_params[:day].humanize} #{course_params[:time].strftime("%I:%M %p")}"
+    assert_selector "h2", text: "#{day} #{time.strftime("%I:%M %p")}"
     assert_current_path art_course_path(@art, @course)
     assert_link "Edit this course", href: edit_art_course_path(@art, @course)
     assert_link "Back to art", href: art_path(@art)

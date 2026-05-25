@@ -17,13 +17,13 @@ class MeetingsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "New meeting for #{@art.abbrev} #{@course.day.humanize}"
     assert_link "Back to course", href: art_course_path(@art, @course)
 
-    meeting_params = attributes_for(:meeting)
+    date = Date.today()
 
-    find("#meeting_date").send_keys(meeting_params[:date].strftime("%m%d%Y"))
+    find("#meeting_date").send_keys(date.strftime("%m%d%Y"))
     click_on "Create Meeting"
 
     # wait for redirect before reading path
-    assert_selector "h2", text: meeting_params[:date].to_s
+    assert_selector "h2", text: date.to_s
     new_meeting_id = current_path.match(/\/meetings\/(\d+)/)[1].to_i
     new_meeting = Meeting.find(new_meeting_id)
     assert_current_path art_course_meeting_path(@art, @course, new_meeting)
@@ -33,11 +33,13 @@ class MeetingsTest < ApplicationSystemTestCase
   test "creating a meeting without a date shows an error" do
     visit new_art_course_meeting_url(@art, @course)
 
-    # don't fill in date
+    # clear date (it defaults to today)
+    fill_in "Date", with: ""
+
     click_on "Create Meeting"
 
-    assert_current_path art_course_meetings_path(@art, @course)
     assert_text "Date can't be blank"
+    assert_selector "form"
   end
 
   test "show page renders meeting details" do

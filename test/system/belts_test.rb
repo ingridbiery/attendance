@@ -14,19 +14,23 @@ class BeltsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "New belt"
     assert_link "Back to art", href: art_path(@art)
 
-    belt_params = attributes_for(:belt)
+    name = "Belt Name"
+    level = 3
+    img = ""
+    color = "Color"
 
-    fill_in "Name", with: belt_params[:name]
-    fill_in "Level", with: belt_params[:level]
-    fill_in "Img", with: ""
+    fill_in "Name", with: name
+    fill_in "Level", with: level
+    fill_in "Img", with: img
+    fill_in "Color", with: color
     click_on "Create Belt"
 
     # put these first so we wait for the page to load before finding the id
-    assert_text belt_params[:level].to_s
+    assert_text level
     new_belt_id = current_path.split("/").last.to_i
     new_belt = Belt.find(new_belt_id)
     assert_current_path art_belt_path(@art, new_belt)
-    assert_link belt_params[:name], href: art_belt_path(@art, new_belt)
+    assert_link name, href: art_belt_path(@art, new_belt)
     assert_link "Edit this belt", href: edit_art_belt_path(@art, new_belt)
     assert_link "Back to art", href: art_path(@art)
   end
@@ -39,16 +43,20 @@ class BeltsTest < ApplicationSystemTestCase
     assert_link "Show this belt", href: art_belt_path(@art, @belt)
     assert_link "Back to art", href: art_path(@art)
 
-    belt_params = attributes_for(:belt)
+    name = "New Name"
+    level = -3
+    img = ""
+    color = "New Color"
 
-    fill_in "Name", with: belt_params[:name]
-    fill_in "Level", with: belt_params[:level]
-    fill_in "Img", with: ""
+    fill_in "Name", with: name
+    fill_in "Level", with: level
+    fill_in "Img", with: img
+    fill_in "Color", with: color
     click_on "Update Belt"
 
     # put these first so we wait for the page to load before finding the id
-    assert_link belt_params[:name], href: art_belt_path(@art, @belt)
-    assert_text belt_params[:level].to_s
+    assert_link name, href: art_belt_path(@art, @belt)
+    assert_text level.to_s
     assert_current_path art_belt_path(@art, @belt)
     assert_link "Edit this belt", href: edit_art_belt_path(@art, @belt)
     assert_link "Back to art", href: art_path(@art)
