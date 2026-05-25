@@ -14,7 +14,7 @@ class MeetingsTest < ApplicationSystemTestCase
     click_link "New", href: new_art_course_meeting_path(@art, @course)
 
     assert_current_path new_art_course_meeting_path(@art, @course)
-    assert_selector "h1", text: "New meeting for #{@art.abbrev} #{@course.day}"
+    assert_selector "h1", text: "New meeting for #{@art.abbrev} #{@course.day.humanize}"
     assert_link "Back to course", href: art_course_path(@art, @course)
 
     meeting_params = attributes_for(:meeting)

@@ -12,7 +12,7 @@ class CoursesTest < ApplicationSystemTestCase
 
     assert_current_path art_courses_path(@art)
     assert_selector "h1", text: "Courses"
-    assert_text @course.day
+    assert_text @course.day.humanize
     assert_text @course.time.strftime("%I:%M %p")
     assert_link "Add", href: new_art_course_path(@art)
     assert_link "Show this course", href: art_course_path(@art, @course)
