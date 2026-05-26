@@ -1,669 +1,105 @@
+# db/seeds.rb
+require 'faker'
+
+# ============================================================
+# Clean slate
+# ============================================================
+Rank.destroy_all
+Attendance.destroy_all
+Meeting.destroy_all
+Course.destroy_all
+Belt.destroy_all
 Art.destroy_all
 Family.destroy_all
-tkd = Art.create(name: "Taekwondo", abbrev: "TKD");
-tkd8g = tkd.belts.create(name: "8th Gup", img: "white.png", color: "white", level: -8);
-tkd7g = tkd.belts.create(name: "7th Gup", img: "yellow.png", color: "yellow", level: -7);
-tkd6g = tkd.belts.create(name: "6th Gup", img: "orange.png", color: "orange", level: -6);
-tkd5g = tkd.belts.create(name: "5th Gup", img: "green.png", color: "green", level: -5);
-tkd4g = tkd.belts.create(name: "4th Gup", img: "blue.png", color: "blue", level: -4);
-tkd3g = tkd.belts.create(name: "3rd Gup", img: "purple.png", color: "purple", level: -3);
-tkd2g = tkd.belts.create(name: "2nd Gup", img: "brown.png", color: "brown", level: -2);
-tkd1g = tkd.belts.create(name: "1st Gup", img: "red.png", color: "red", level: -1);
-tkd0g = tkd.belts.create(name: "Deputy Black Belt", img: "deputy.png", color: "red", level: 0);
-tkd1d = tkd.belts.create(name: "1st Dan", img: "black.png", color: "black", level: 1);
-tkd2d = tkd.belts.create(name: "2nd Dan", img: "black.png", color: "black", level: 2);
-tkd3d = tkd.belts.create(name: "3rd Dan", img: "black.png", color: "black", level: 3);
-tkd4d = tkd.belts.create(name: "4th Dan", img: "black.png", color: "black", level: 4);
-tkd5d = tkd.belts.create(name: "5th Dan", img: "black.png", color: "black", level: 5);
-tkd.courses.create(day: "Sunday");
-tkd.courses.create(day: "Tuesday");
-tkd.courses.create(day: "Wednesday");
-tkd.courses.create(day: "Thursday");
 
-hdg = Art.create(name: "Haidong Gumdo", abbrev: "HDG");
-hdg8g = hdg.belts.create(name: "8th Gup", img: "white.png", color: "white", level: -8);
-hdg7g = hdg.belts.create(name: "7th Gup", img: "yellow.png", color: "yellow", level: -7);
-hdg6g = hdg.belts.create(name: "6th Gup", img: "orange.png", color: "orange", level: -6);
-hdg5g = hdg.belts.create(name: "5th Gup", img: "green.png", color: "green", level: -5);
-hdg4g = hdg.belts.create(name: "4th Gup", img: "blue.png", color: "blue", level: -4);
-hdg3g = hdg.belts.create(name: "3rd Gup", img: "purple.png", color: "purple", level: -3);
-hdg2g = hdg.belts.create(name: "2nd Gup", img: "brown.png", color: "brown", level: -2);
-hdg1g = hdg.belts.create(name: "1st Gup", img: "red.png", color: "red", level: -1);
-hdg0g = hdg.belts.create(name: "Deputy Black Belt", img: "deputy.png", color: "red", level: 0);
-hdg1d = hdg.belts.create(name: "1st Dan", img: "black.png", color: "black", level: 1);
-hdg2d = hdg.belts.create(name: "2nd Dan", img: "black.png", color: "black", level: 2);
-hdg3d = hdg.belts.create(name: "3rd Dan", img: "black.png", color: "black", level: 3);
-hdg4d = hdg.belts.create(name: "4th Dan", img: "black.png", color: "black", level: 4);
-hdg5d = hdg.belts.create(name: "5th Dan", img: "black.png", color: "black", level: 5);
-hdg.courses.create(day: "Sunday");
-hdg.courses.create(day: "Monday");
-hdg.courses.create(day: "Tuesday");
-hdg.courses.create(day: "Wednesday");
-hdg.courses.create(day: "Thursday");
-hdg.courses.create(day: "Friday");
+# ============================================================
+# Arts, Belts, Courses  (real data)
+# ============================================================
 
-hkd = Art.create(name: "Hapkido", abbrev: "HKD");
-hkd8g = hkd.belts.create(name: "8th Gup", img: "white.png", color: "white", level: -8);
-hkd7g = hkd.belts.create(name: "7th Gup", img: "yellow.png", color: "yellow", level: -7);
-hkd6g = hkd.belts.create(name: "6th Gup", img: "orange.png", color: "orange", level: -6);
-hkd5g = hkd.belts.create(name: "5th Gup", img: "green.png", color: "green", level: -5);
-hkd4g = hkd.belts.create(name: "4th Gup", img: "blue.png", color: "blue", level: -4);
-hkd3g = hkd.belts.create(name: "3rd Gup", img: "purple.png", color: "purple", level: -3);
-hkd2g = hkd.belts.create(name: "2nd Gup", img: "brown.png", color: "brown", level: -2);
-hkd1g = hkd.belts.create(name: "1st Gup", img: "red.png", color: "red", level: -1);
-hkd0g = hkd.belts.create(name: "Deputy Black Belt", img: "deputy.png", color: "red", level: 0);
-hkd1d = hkd.belts.create(name: "1st Dan", img: "black.png", color: "black", level: 1);
-hkd2d = hkd.belts.create(name: "2nd Dan", img: "black.png", color: "black", level: 2);
-hkd3d = hkd.belts.create(name: "3rd Dan", img: "black.png", color: "black", level: 3);
-hkd4d = hkd.belts.create(name: "4th Dan", img: "black.png", color: "black", level: 4);
-hkd5d = hkd.belts.create(name: "5th Dan", img: "black.png", color: "black", level: 5);
-hkd.courses.create(day: "Monday");
-hkd.courses.create(day: "Wednesday");
-hkd.courses.create(day: "Friday");
+BELT_PROGRESSION = [
+{ name: "8th Gup", img: "",  color: "white",  level: -8 },
+{ name: "7th Gup", img: "", color: "yellow", level: -7 },
+{ name: "6th Gup", img: "", color: "orange", level: -6 },
+{ name: "5th Gup", img: "",  color: "green",  level: -5 },
+{ name: "4th Gup", img: "",   color: "blue",   level: -4 },
+{ name: "3rd Gup", img: "", color: "purple", level: -3 },
+{ name: "2nd Gup", img: "",  color: "brown",  level: -2 },
+{ name: "1st Gup", img: "",    color: "red",    level: -1 },
+{ name: "Deputy Black Belt", img: "", color: "red", level: 0 },
+{ name: "1st Dan", img: "",  color: "black",  level: 1 },
+{ name: "2nd Dan", img: "",  color: "black",  level: 2 },
+{ name: "3rd Dan", img: "",  color: "black",  level: 3 },
+{ name: "4th Dan", img: "",  color: "black",  level: 4 },
+{ name: "5th Dan", img: "",  color: "black",  level: 5 },
+]
 
-gky = Art.create(name: "Gongkwon Yusul", abbrev: "GKY");
-gky8g = gky.belts.create(name: "8th Gup", img: "white.png", color: "white", level: -8);
-gky7g = gky.belts.create(name: "7th Gup", img: "yellow.png", color: "yellow", level: -7);
-gky6g = gky.belts.create(name: "6th Gup", img: "orange.png", color: "orange", level: -6);
-gky5g = gky.belts.create(name: "5th Gup", img: "green.png", color: "green", level: -5);
-gky4g = gky.belts.create(name: "4th Gup", img: "blue.png", color: "blue", level: -4);
-gky3g = gky.belts.create(name: "3rd Gup", img: "purple.png", color: "purple", level: -3);
-gky2g = gky.belts.create(name: "2nd Gup", img: "brown.png", color: "brown", level: -2);
-gky1g = gky.belts.create(name: "1st Gup", img: "red.png", color: "red", level: -1);
-gky0g = gky.belts.create(name: "Deputy Black Belt", img: "deputy.png", color: "red", level: 0);
-gky1d = gky.belts.create(name: "1st Dan", img: "black.png", color: "black", level: 1);
-gky2d = gky.belts.create(name: "2nd Dan", img: "black.png", color: "black", level: 2);
-gky3d = gky.belts.create(name: "3rd Dan", img: "black.png", color: "black", level: 3);
-gky4d = gky.belts.create(name: "4th Dan", img: "black.png", color: "black", level: 4);
-gky5d = gky.belts.create(name: "5th Dan", img: "black.png", color: "black", level: 5);
-gky.courses.create(day: "Sunday");
-gky.courses.create(day: "Monday");
-gky.courses.create(day: "Wednesday");
-gky.courses.create(day: "Friday");
+tkd = Art.create!(name: "Taekwondo", abbrev: "TKD")
+BELT_PROGRESSION.each { |b| tkd.belts.create!(b) }
+tkd.courses.create!(day: :sunday)
+tkd.courses.create!(day: :tuesday)
+tkd.courses.create!(day: :wednesday)
+tkd.courses.create!(day: :thursday)
 
-a_w = Art.create(name: "Archery/Weapons", abbrev: "A/W");
-a_w8g = a_w.belts.create(name: "8th Gup", img: "white.png", color: "white", level: -8);
-a_w7g = a_w.belts.create(name: "7th Gup", img: "yellow.png", color: "yellow", level: -7);
-a_w6g = a_w.belts.create(name: "6th Gup", img: "orange.png", color: "orange", level: -6);
-a_w5g = a_w.belts.create(name: "5th Gup", img: "green.png", color: "green", level: -5);
-a_w4g = a_w.belts.create(name: "4th Gup", img: "blue.png", color: "blue", level: -4);
-a_w3g = a_w.belts.create(name: "3rd Gup", img: "purple.png", color: "purple", level: -3);
-a_w2g = a_w.belts.create(name: "2nd Gup", img: "brown.png", color: "brown", level: -2);
-a_w1g = a_w.belts.create(name: "1st Gup", img: "red.png", color: "red", level: -1);
-a_w0g = a_w.belts.create(name: "Deputy Black Belt", img: "deputy.png", color: "red", level: 0);
-a_w1d = a_w.belts.create(name: "1st Dan", img: "black.png", color: "black", level: 1);
-a_w2d = a_w.belts.create(name: "2nd Dan", img: "black.png", color: "black", level: 2);
-a_w3d = a_w.belts.create(name: "3rd Dan", img: "black.png", color: "black", level: 3);
-a_w4d = a_w.belts.create(name: "4th Dan", img: "black.png", color: "black", level: 4);
-a_w5d = a_w.belts.create(name: "5th Dan", img: "black.png", color: "black", level: 5);
-a_w.courses.create(day: "Sunday");
-a_w.courses.create(day: "Friday");
+hdg = Art.create!(name: "Haidong Gumdo", abbrev: "HDG")
+BELT_PROGRESSION.each { |b| hdg.belts.create!(b) }
+hdg.courses.create!(day: :sunday)
+hdg.courses.create!(day: :monday)
+hdg.courses.create!(day: :tuesday)
+hdg.courses.create!(day: :wednesday)
+hdg.courses.create!(day: :thursday)
+hdg.courses.create!(day: :friday)
 
-kb = Art.create(name: "KickBoxing", abbrev: "KB");
-kb8g = kb.belts.create(name: "8th Gup", img: "white.png", color: "white", level: -8);
-kb7g = kb.belts.create(name: "7th Gup", img: "yellow.png", color: "yellow", level: -7);
-kb6g = kb.belts.create(name: "6th Gup", img: "orange.png", color: "orange", level: -6);
-kb5g = kb.belts.create(name: "5th Gup", img: "green.png", color: "green", level: -5);
-kb4g = kb.belts.create(name: "4th Gup", img: "blue.png", color: "blue", level: -4);
-kb3g = kb.belts.create(name: "3rd Gup", img: "purple.png", color: "purple", level: -3);
-kb2g = kb.belts.create(name: "2nd Gup", img: "brown.png", color: "brown", level: -2);
-kb1g = kb.belts.create(name: "1st Gup", img: "red.png", color: "red", level: -1);
-kb0g = kb.belts.create(name: "Deputy Black Belt", img: "deputy.png", color: "red", level: 0);
-kb1d = kb.belts.create(name: "1st Dan", img: "black.png", color: "black", level: 1);
-kb2d = kb.belts.create(name: "2nd Dan", img: "black.png", color: "black", level: 2);
-kb3d = kb.belts.create(name: "3rd Dan", img: "black.png", color: "black", level: 3);
-kb4d = kb.belts.create(name: "4th Dan", img: "black.png", color: "black", level: 4);
-kb5d = kb.belts.create(name: "5th Dan", img: "black.png", color: "black", level: 5);
-kb.courses.create(day: "Wednesday");
+hkd = Art.create!(name: "Hapkido", abbrev: "HKD")
+BELT_PROGRESSION.each { |b| hkd.belts.create!(b) }
+hkd.courses.create!(day: :monday)
+hkd.courses.create!(day: :wednesday)
+hkd.courses.create!(day: :friday)
 
-f = Family.create(name: 'Adams');
-p = f.people.create(first_name: 'Jrue', last_name: 'Adams', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2d, person: p);
-Rank.create(belt: hkd2g, person: p);
-p = f.people.create(first_name: 'Harlem', last_name: 'Adams', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd5g, person: p);
-f = Family.create(name: 'Afify');
-p = f.people.create(first_name: 'Maleah', last_name: 'Afify', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1d, person: p);
-Rank.create(belt: hdg8g, person: p);
-f = Family.create(name: 'Allaband');
-p = f.people.create(first_name: 'Emberlynn', last_name: 'Allaband', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-f = Family.create(name: 'Allen');
-p = f.people.create(first_name: 'Duncan', last_name: 'Allen', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2d, person: p);
-Rank.create(belt: hkd3g, person: p);
-Rank.create(belt: a_w3g, person: p);
-f = Family.create(name: 'Amspoker');
-p = f.people.create(first_name: 'Darian', last_name: 'Amspoker', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd0g, person: p);
-p = f.people.create(first_name: 'Vihaan', last_name: 'Amspoker', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd0g, person: p);
-Rank.create(belt: gky7g, person: p);
-p = f.people.create(first_name: 'Kabir', last_name: 'Amspoker', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky8g, person: p);
-f = Family.create(name: 'Anderson');
-p = f.people.create(first_name: 'Kamryn', last_name: 'Anderson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky8g, person: p);
-f = Family.create(name: 'Ardolf');
-p = f.people.create(first_name: 'Winona', last_name: 'Ardolf', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-Rank.create(belt: a_w6g, person: p);
-p = f.people.create(first_name: 'Korbin', last_name: 'Ardolf', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4g, person: p);
-p = f.people.create(first_name: 'Mekhi', last_name: 'Ardolf', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4g, person: p);
-p = f.people.create(first_name: 'Barbara', last_name: 'Ardolf', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Atonal');
-p = f.people.create(first_name: 'Darwin', last_name: 'Atonal', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2d, person: p);
-p = f.people.create(first_name: 'Jaylah', last_name: 'Atonal', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd3g, person: p);
-f = Family.create(name: 'Baker');
-p = f.people.create(first_name: 'Belle', last_name: 'Baker', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-f = Family.create(name: 'Banasiewicz');
-p = f.people.create(first_name: 'Avah', last_name: 'Banasiewicz', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2d, person: p);
-Rank.create(belt: hdg2d, person: p);
-f = Family.create(name: 'Beischel');
-p = f.people.create(first_name: 'Giovanna', last_name: 'Beischel', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hkd8g, person: p);
-Rank.create(belt: a_w8g, person: p);
-f = Family.create(name: 'Bidelspach');
-p = f.people.create(first_name: 'Vance', last_name: 'Bidelspach', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-p = f.people.create(first_name: 'Nori', last_name: 'Bidelspach', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-p = f.people.create(first_name: 'Shmuel', last_name: 'Bidelspach', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-p = f.people.create(first_name: 'Adler', last_name: 'Bidelspach', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Bombardo');
-p = f.people.create(first_name: 'Yousef', last_name: 'Bombardo', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg4d, person: p);
-Rank.create(belt: hkd1d, person: p);
-Rank.create(belt: a_w3g, person: p);
-p = f.people.create(first_name: 'Keily', last_name: 'Bombardo', dob: Date.new(1970, 1, 1));
-Rank.create(belt: kb8g, person: p);
-p = f.people.create(first_name: 'Shay', last_name: 'Bombardo', dob: Date.new(1970, 1, 1));
-Rank.create(belt: a_w3g, person: p);
-Rank.create(belt: kb8g, person: p);
-f = Family.create(name: 'Bressett');
-p = f.people.create(first_name: 'Van', last_name: 'Bressett', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-f = Family.create(name: 'Brown');
-p = f.people.create(first_name: 'Luella', last_name: 'Brown', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2d, person: p);
-Rank.create(belt: a_w3g, person: p);
-p = f.people.create(first_name: 'Aldo', last_name: 'Brown', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2d, person: p);
-Rank.create(belt: a_w3g, person: p);
-f = Family.create(name: 'Bullara');
-p = f.people.create(first_name: 'Alistair', last_name: 'Bullara', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg8g, person: p);
-Rank.create(belt: gky8g, person: p);
-f = Family.create(name: 'Calascione');
-p = f.people.create(first_name: 'Elia', last_name: 'Calascione', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-p = f.people.create(first_name: 'Scottie', last_name: 'Calascione', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-Rank.create(belt: gky8g, person: p);
-p = f.people.create(first_name: 'Shepard', last_name: 'Calascione', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Campbell');
-p = f.people.create(first_name: 'Lux', last_name: 'Campbell', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2d, person: p);
-Rank.create(belt: gky1g, person: p);
-Rank.create(belt: a_w3g, person: p);
-f = Family.create(name: 'Carpiniello');
-p = f.people.create(first_name: 'Kartier', last_name: 'Carpiniello', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-f = Family.create(name: 'Carter');
-p = f.people.create(first_name: 'Rodney', last_name: 'Carter', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4d, person: p);
-p = f.people.create(first_name: 'Tru', last_name: 'Carter', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-f = Family.create(name: 'Chaparala');
-p = f.people.create(first_name: 'Saoirse', last_name: 'Chaparala', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky8g, person: p);
-f = Family.create(name: 'Chorro');
-p = f.people.create(first_name: 'Cartier', last_name: 'Chorro', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-Rank.create(belt: hdg4g, person: p);
-Rank.create(belt: kb8g, person: p);
-p = f.people.create(first_name: 'Cassian', last_name: 'Chorro', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-Rank.create(belt: hdg4g, person: p);
-p = f.people.create(first_name: 'India', last_name: 'Chorro', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-Rank.create(belt: hdg4g, person: p);
-f = Family.create(name: 'Clark');
-p = f.people.create(first_name: 'Lakelynn', last_name: 'Clark', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-f = Family.create(name: 'Clyborne');
-p = f.people.create(first_name: 'Rebekah', last_name: 'Clyborne', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2g, person: p);
-f = Family.create(name: 'Concord');
-p = f.people.create(first_name: 'Egypt', last_name: 'Concord', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-Rank.create(belt: hkd4g, person: p);
-f = Family.create(name: 'Cripple');
-p = f.people.create(first_name: 'Xyla', last_name: 'Cripple', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hkd6g, person: p);
-Rank.create(belt: a_w8g, person: p);
-f = Family.create(name: 'Dallarosa');
-p = f.people.create(first_name: 'Aadhya', last_name: 'Dallarosa', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-f = Family.create(name: 'Davis');
-p = f.people.create(first_name: 'Stone', last_name: 'Davis', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky3g, person: p);
-f = Family.create(name: 'Delatejera');
-p = f.people.create(first_name: 'Rylan', last_name: 'Delatejera', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky5g, person: p);
-f = Family.create(name: 'Denetsosie');
-p = f.people.create(first_name: 'Gian', last_name: 'Denetsosie', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky1g, person: p);
-Rank.create(belt: a_w8g, person: p);
-Rank.create(belt: kb8g, person: p);
-f = Family.create(name: 'Dierksheide');
-p = f.people.create(first_name: 'Lauryn', last_name: 'Dierksheide', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg1d, person: p);
-p = f.people.create(first_name: 'Amaris', last_name: 'Dierksheide', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky4g, person: p);
-f = Family.create(name: 'Dolivo');
-p = f.people.create(first_name: 'Raina', last_name: 'Dolivo', dob: Date.new(1970, 1, 1));
-Rank.create(belt: a_w6g, person: p);
-f = Family.create(name: 'Doxon');
-p = f.people.create(first_name: 'Brecken', last_name: 'Doxon', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-p = f.people.create(first_name: 'Guinevere', last_name: 'Doxon', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-f = Family.create(name: 'Duckstein');
-p = f.people.create(first_name: 'Zainab', last_name: 'Duckstein', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1d, person: p);
-Rank.create(belt: hdg1d, person: p);
-f = Family.create(name: 'Ekundayo');
-p = f.people.create(first_name: 'Addilynn', last_name: 'Ekundayo', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-p = f.people.create(first_name: 'Rene', last_name: 'Ekundayo', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-p = f.people.create(first_name: 'Atharv', last_name: 'Ekundayo', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-f = Family.create(name: 'Eswaran');
-p = f.people.create(first_name: 'Nathalia', last_name: 'Eswaran', dob: Date.new(1970, 1, 1));
-Rank.create(belt: kb8g, person: p);
-f = Family.create(name: 'Featheringham');
-p = f.people.create(first_name: 'Kamilah', last_name: 'Featheringham', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2g, person: p);
-p = f.people.create(first_name: 'Wesson', last_name: 'Featheringham', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Feyrer');
-p = f.people.create(first_name: 'Davian', last_name: 'Feyrer', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky5g, person: p);
-f = Family.create(name: 'Floding');
-p = f.people.create(first_name: 'Ryatt', last_name: 'Floding', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2d, person: p);
-Rank.create(belt: hdg5g, person: p);
-p = f.people.create(first_name: 'Indigo', last_name: 'Floding', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-Rank.create(belt: hdg5g, person: p);
-f = Family.create(name: 'Flores');
-p = f.people.create(first_name: 'Khalid', last_name: 'Flores', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg1d, person: p);
-Rank.create(belt: a_w4g, person: p);
-f = Family.create(name: 'Freling');
-p = f.people.create(first_name: 'Brylee', last_name: 'Freling', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-p = f.people.create(first_name: 'Eugene', last_name: 'Freling', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2g, person: p);
-p = f.people.create(first_name: 'Benedict', last_name: 'Freling', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2g, person: p);
-f = Family.create(name: 'Gancayco');
-p = f.people.create(first_name: 'Nyra', last_name: 'Gancayco', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky7g, person: p);
-f = Family.create(name: 'Garcia');
-p = f.people.create(first_name: 'Jakob', last_name: 'Garcia', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-f = Family.create(name: 'Gayhardt');
-p = f.people.create(first_name: 'Julissa', last_name: 'Gayhardt', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd3g, person: p);
-p = f.people.create(first_name: 'Paloma', last_name: 'Gayhardt', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-f = Family.create(name: 'Gessele');
-p = f.people.create(first_name: 'Rosalee', last_name: 'Gessele', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg1d, person: p);
-p = f.people.create(first_name: 'Ignacio', last_name: 'Gessele', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg1d, person: p);
-f = Family.create(name: 'Ginart');
-p = f.people.create(first_name: 'Jaxx', last_name: 'Ginart', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-p = f.people.create(first_name: 'Princess', last_name: 'Ginart', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-f = Family.create(name: 'Gonzales');
-p = f.people.create(first_name: 'Casey', last_name: 'Gonzales', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2d, person: p);
-f = Family.create(name: 'Goscicki');
-p = f.people.create(first_name: 'Lisa', last_name: 'Goscicki', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-p = f.people.create(first_name: 'Bryant', last_name: 'Goscicki', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-p = f.people.create(first_name: 'Rosalyn', last_name: 'Goscicki', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-f = Family.create(name: 'Green');
-p = f.people.create(first_name: 'Demetrius', last_name: 'Green', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Grigoras');
-p = f.people.create(first_name: 'Emmeline', last_name: 'Grigoras', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg3d, person: p);
-p = f.people.create(first_name: 'Nancy', last_name: 'Grigoras', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg3g, person: p);
-f = Family.create(name: 'Guillebeaux');
-p = f.people.create(first_name: 'Alianna', last_name: 'Guillebeaux', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2d, person: p);
-f = Family.create(name: 'Hall');
-p = f.people.create(first_name: 'Imran', last_name: 'Hall', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg8g, person: p);
-f = Family.create(name: 'Hanschu');
-p = f.people.create(first_name: 'Inaya', last_name: 'Hanschu', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4g, person: p);
-Rank.create(belt: hdg5g, person: p);
-Rank.create(belt: a_w8g, person: p);
-p = f.people.create(first_name: 'Stefan', last_name: 'Hanschu', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4g, person: p);
-Rank.create(belt: hdg7g, person: p);
-Rank.create(belt: a_w8g, person: p);
-f = Family.create(name: 'Harris');
-p = f.people.create(first_name: 'Magdalena', last_name: 'Harris', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-p = f.people.create(first_name: 'Kooper', last_name: 'Harris', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2g, person: p);
-p = f.people.create(first_name: 'Osman', last_name: 'Harris', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd3g, person: p);
-f = Family.create(name: 'Hayda');
-p = f.people.create(first_name: 'Sapphire', last_name: 'Hayda', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd3g, person: p);
-p = f.people.create(first_name: 'Lakelyn', last_name: 'Hayda', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd3g, person: p);
-f = Family.create(name: 'Henris');
-p = f.people.create(first_name: 'Averi', last_name: 'Henris', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd3g, person: p);
-p = f.people.create(first_name: 'Elsa', last_name: 'Henris', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-f = Family.create(name: 'Hernandez');
-p = f.people.create(first_name: 'Terry', last_name: 'Hernandez', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg4d, person: p);
-Rank.create(belt: gky2d, person: p);
-Rank.create(belt: a_w3g, person: p);
-p = f.people.create(first_name: 'Asaiah', last_name: 'Hernandez', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2d, person: p);
-Rank.create(belt: gky1d, person: p);
-Rank.create(belt: a_w4g, person: p);
-f = Family.create(name: 'Hill');
-p = f.people.create(first_name: 'Lottie', last_name: 'Hill', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd0g, person: p);
-f = Family.create(name: 'Hinsen');
-p = f.people.create(first_name: 'Kairi', last_name: 'Hinsen', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hkd1g, person: p);
-f = Family.create(name: 'Hoig');
-p = f.people.create(first_name: 'Eren', last_name: 'Hoig', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd0g, person: p);
-Rank.create(belt: hdg1d, person: p);
-Rank.create(belt: a_w3g, person: p);
-f = Family.create(name: 'Hulls');
-p = f.people.create(first_name: 'Billie', last_name: 'Hulls', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4g, person: p);
-f = Family.create(name: 'Ionadi');
-p = f.people.create(first_name: 'Ezrah', last_name: 'Ionadi', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2d, person: p);
-Rank.create(belt: hdg4d, person: p);
-f = Family.create(name: 'Jackson');
-p = f.people.create(first_name: 'Ivaan', last_name: 'Jackson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg8g, person: p);
-Rank.create(belt: gky7g, person: p);
-f = Family.create(name: 'Javernick');
-p = f.people.create(first_name: 'Maxton', last_name: 'Javernick', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg5d, person: p);
-Rank.create(belt: kb8g, person: p);
-f = Family.create(name: 'Johnson');
-p = f.people.create(first_name: 'Saanvi', last_name: 'Johnson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-p = f.people.create(first_name: 'Brennan', last_name: 'Johnson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-p = f.people.create(first_name: 'Ryann', last_name: 'Johnson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-f = Family.create(name: 'Jones');
-p = f.people.create(first_name: 'Kanan', last_name: 'Jones', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky7g, person: p);
-f = Family.create(name: 'Jonguitud');
-p = f.people.create(first_name: 'Vida', last_name: 'Jonguitud', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4d, person: p);
-f = Family.create(name: 'Kasprak');
-p = f.people.create(first_name: 'Wallace', last_name: 'Kasprak', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-f = Family.create(name: 'Kentala');
-p = f.people.create(first_name: 'Katelyn', last_name: 'Kentala', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd3g, person: p);
-f = Family.create(name: 'King');
-p = f.people.create(first_name: 'Paola', last_name: 'King', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg3d, person: p);
-f = Family.create(name: 'Kleinhaus');
-p = f.people.create(first_name: 'Yisroel', last_name: 'Kleinhaus', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg5g, person: p);
-f = Family.create(name: 'Konietzko');
-p = f.people.create(first_name: 'Sarahi', last_name: 'Konietzko', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hkd8g, person: p);
-f = Family.create(name: 'Kronbach');
-p = f.people.create(first_name: 'Coleson', last_name: 'Kronbach', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-p = f.people.create(first_name: 'Nyomi', last_name: 'Kronbach', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-p = f.people.create(first_name: 'Madalyn', last_name: 'Kronbach', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-f = Family.create(name: 'Kustka');
-p = f.people.create(first_name: 'Rhodes', last_name: 'Kustka', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-p = f.people.create(first_name: 'Rowyn', last_name: 'Kustka', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-Rank.create(belt: hdg8g, person: p);
-p = f.people.create(first_name: 'Zev', last_name: 'Kustka', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg8g, person: p);
-f = Family.create(name: 'Lahde');
-p = f.people.create(first_name: 'Simone', last_name: 'Lahde', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-f = Family.create(name: 'Latcha');
-p = f.people.create(first_name: 'Chanel', last_name: 'Latcha', dob: Date.new(1970, 1, 1));
-Rank.create(belt: kb8g, person: p);
-f = Family.create(name: 'Lee');
-p = f.people.create(first_name: 'Cullen', last_name: 'Lee', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2d, person: p);
-Rank.create(belt: hdg4g, person: p);
-f = Family.create(name: 'Leneghan');
-p = f.people.create(first_name: 'Kahlani', last_name: 'Leneghan', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-f = Family.create(name: 'Lewis');
-p = f.people.create(first_name: 'Marlon', last_name: 'Lewis', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2g, person: p);
-p = f.people.create(first_name: 'Osiris', last_name: 'Lewis', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2g, person: p);
-f = Family.create(name: 'Llama');
-p = f.people.create(first_name: 'Joyce', last_name: 'Llama', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2d, person: p);
-Rank.create(belt: gky1g, person: p);
-f = Family.create(name: 'Lopez');
-p = f.people.create(first_name: 'Braden', last_name: 'Lopez', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2g, person: p);
-Rank.create(belt: hkd6g, person: p);
-Rank.create(belt: a_w8g, person: p);
-f = Family.create(name: 'Luettgen');
-p = f.people.create(first_name: 'Talon', last_name: 'Luettgen', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2g, person: p);
-Rank.create(belt: hdg4g, person: p);
-f = Family.create(name: 'Madris');
-p = f.people.create(first_name: 'Yael', last_name: 'Madris', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Maloles');
-p = f.people.create(first_name: 'Aubriella', last_name: 'Maloles', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-f = Family.create(name: 'Martin');
-p = f.people.create(first_name: 'Laylani', last_name: 'Martin', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hkd7g, person: p);
-f = Family.create(name: 'Martinez');
-p = f.people.create(first_name: 'Rosalina', last_name: 'Martinez', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky8g, person: p);
-f = Family.create(name: 'Marudas');
-p = f.people.create(first_name: 'Laylah', last_name: 'Marudas', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Mccallops');
-p = f.people.create(first_name: 'London', last_name: 'Mccallops', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hkd8g, person: p);
-f = Family.create(name: 'Melgren');
-p = f.people.create(first_name: 'Zechariah', last_name: 'Melgren', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hkd7g, person: p);
-Rank.create(belt: a_w8g, person: p);
-f = Family.create(name: 'Mickelberg');
-p = f.people.create(first_name: 'Cain', last_name: 'Mickelberg', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd5g, person: p);
-f = Family.create(name: 'Miller');
-p = f.people.create(first_name: 'Deborah', last_name: 'Miller', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg6g, person: p);
-f = Family.create(name: 'Mishchuk');
-p = f.people.create(first_name: 'Kallie', last_name: 'Mishchuk', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1d, person: p);
-Rank.create(belt: gky1d, person: p);
-Rank.create(belt: hkd3g, person: p);
-Rank.create(belt: a_w8g, person: p);
-Rank.create(belt: kb8g, person: p);
-f = Family.create(name: 'Mitchell');
-p = f.people.create(first_name: 'Yasmin', last_name: 'Mitchell', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2g, person: p);
-f = Family.create(name: 'Moore');
-p = f.people.create(first_name: 'Emiliana', last_name: 'Moore', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4d, person: p);
-p = f.people.create(first_name: 'Bronson', last_name: 'Moore', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4d, person: p);
-f = Family.create(name: 'Mosheyev');
-p = f.people.create(first_name: 'Thatcher', last_name: 'Mosheyev', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4g, person: p);
-p = f.people.create(first_name: 'Tinsley', last_name: 'Mosheyev', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-f = Family.create(name: 'Naese');
-p = f.people.create(first_name: 'Elisabeth', last_name: 'Naese', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd3g, person: p);
-f = Family.create(name: 'Nelson');
-p = f.people.create(first_name: 'Jones', last_name: 'Nelson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1d, person: p);
-Rank.create(belt: hdg2d, person: p);
-Rank.create(belt: a_w6g, person: p);
-p = f.people.create(first_name: 'Dangelo', last_name: 'Nelson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky1g, person: p);
-Rank.create(belt: a_w3g, person: p);
-Rank.create(belt: kb8g, person: p);
-p = f.people.create(first_name: 'Harold', last_name: 'Nelson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: a_w8g, person: p);
-f = Family.create(name: 'Nguyen');
-p = f.people.create(first_name: 'Neriah', last_name: 'Nguyen', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg1g, person: p);
-Rank.create(belt: a_w7g, person: p);
-f = Family.create(name: 'Nierling');
-p = f.people.create(first_name: 'Alaric', last_name: 'Nierling', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2d, person: p);
-p = f.people.create(first_name: 'Kylen', last_name: 'Nierling', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2d, person: p);
-f = Family.create(name: 'Occhialini');
-p = f.people.create(first_name: 'Araceli', last_name: 'Occhialini', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky8g, person: p);
-f = Family.create(name: 'Ollenburger');
-p = f.people.create(first_name: 'Kaizen', last_name: 'Ollenburger', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-p = f.people.create(first_name: 'Layne', last_name: 'Ollenburger', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-p = f.people.create(first_name: 'Teo', last_name: 'Ollenburger', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Owsinski');
-p = f.people.create(first_name: 'Maisy', last_name: 'Owsinski', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4g, person: p);
-f = Family.create(name: 'Panchak');
-p = f.people.create(first_name: 'Alaiya', last_name: 'Panchak', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd5g, person: p);
-p = f.people.create(first_name: 'Gary', last_name: 'Panchak', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd5g, person: p);
-f = Family.create(name: 'Pegany');
-p = f.people.create(first_name: 'Henrik', last_name: 'Pegany', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Perez');
-p = f.people.create(first_name: 'Neo', last_name: 'Perez', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky3g, person: p);
-f = Family.create(name: 'Petrunich');
-p = f.people.create(first_name: 'Cedric', last_name: 'Petrunich', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd2g, person: p);
-f = Family.create(name: 'Ploense');
-p = f.people.create(first_name: 'Dion', last_name: 'Ploense', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-p = f.people.create(first_name: 'Scarlette', last_name: 'Ploense', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-p = f.people.create(first_name: 'Meilani', last_name: 'Ploense', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-f = Family.create(name: 'Protich');
-p = f.people.create(first_name: 'Sariah', last_name: 'Protich', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Ragsdill');
-p = f.people.create(first_name: 'Zen', last_name: 'Ragsdill', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Ramirez');
-p = f.people.create(first_name: 'Meir', last_name: 'Ramirez', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Reat');
-p = f.people.create(first_name: 'Agustin', last_name: 'Reat', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd7g, person: p);
-f = Family.create(name: 'Riggie');
-p = f.people.create(first_name: 'Hadleigh', last_name: 'Riggie', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4d, person: p);
-Rank.create(belt: hdg4d, person: p);
-Rank.create(belt: gky2d, person: p);
-f = Family.create(name: 'Rivera');
-p = f.people.create(first_name: 'Maddie', last_name: 'Rivera', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky4g, person: p);
-p = f.people.create(first_name: 'Ainhoa', last_name: 'Rivera', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky4g, person: p);
-f = Family.create(name: 'Roberts');
-p = f.people.create(first_name: 'Aurelio', last_name: 'Roberts', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4d, person: p);
-Rank.create(belt: hdg4d, person: p);
-p = f.people.create(first_name: 'Kalel', last_name: 'Roberts', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1d, person: p);
-Rank.create(belt: hdg1d, person: p);
-p = f.people.create(first_name: 'Avalynn', last_name: 'Roberts', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1g, person: p);
-Rank.create(belt: hdg6g, person: p);
-f = Family.create(name: 'Robinson');
-p = f.people.create(first_name: 'Carla', last_name: 'Robinson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2g, person: p);
-p = f.people.create(first_name: 'Kenia', last_name: 'Robinson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2g, person: p);
-p = f.people.create(first_name: 'Artemis', last_name: 'Robinson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2g, person: p);
-p = f.people.create(first_name: 'Gordon', last_name: 'Robinson', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2g, person: p);
-f = Family.create(name: 'Rodriguez');
-p = f.people.create(first_name: 'Cielo', last_name: 'Rodriguez', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd4g, person: p);
-f = Family.create(name: 'Rugger');
-p = f.people.create(first_name: 'Lenora', last_name: 'Rugger', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd8g, person: p);
-f = Family.create(name: 'Salotto');
-p = f.people.create(first_name: 'Westyn', last_name: 'Salotto', dob: Date.new(1970, 1, 1));
-Rank.create(belt: gky8g, person: p);
-f = Family.create(name: 'Sanchez');
-p = f.people.create(first_name: 'Kristian', last_name: 'Sanchez', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg2g, person: p);
-f = Family.create(name: 'Scheben');
-p = f.people.create(first_name: 'Lexie', last_name: 'Scheben', dob: Date.new(1970, 1, 1));
-Rank.create(belt: hdg1d, person: p);
-f = Family.create(name: 'Schoellman');
-p = f.people.create(first_name: 'Zavier', last_name: 'Schoellman', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd6g, person: p);
-f = Family.create(name: 'Scott');
-p = f.people.create(first_name: 'Colten', last_name: 'Scott', dob: Date.new(1970, 1, 1));
-Rank.create(belt: tkd1d, person: p);
+gky = Art.create!(name: "Gongkwon Yusul", abbrev: "GKY")
+BELT_PROGRESSION.each { |b| gky.belts.create!(b) }
+gky.courses.create!(day: :sunday)
+gky.courses.create!(day: :monday)
+gky.courses.create!(day: :wednesday)
+gky.courses.create!(day: :friday)
+
+a_w = Art.create!(name: "Archery/Weapons", abbrev: "A/W")
+BELT_PROGRESSION.each { |b| a_w.belts.create!(b) }
+a_w.courses.create!(day: :sunday)
+a_w.courses.create!(day: :friday)
+
+kb = Art.create!(name: "KickBoxing", abbrev: "KB")
+BELT_PROGRESSION.each { |b| kb.belts.create!(b) }
+kb.courses.create!(day: :wednesday)
+
+all_arts = Art.all.to_a
+
+# ============================================================
+# Families, People, Ranks  (Faker-generated)
+# ============================================================
+
+last_names = 100.times.map { Faker::Name.last_name }.uniq
+last_names.each do |last_name|
+  family = Family.find_or_create_by!(name: last_name)
+  
+  rand(1..4).times do
+    person = family.people.create!(
+    first_name: Faker::Name.first_name,
+    last_name:  last_name,
+    dob:        Faker::Date.birthday(min_age: 5, max_age: 60)
+    )
+    
+    # Each person gets a rank in 1-3 arts (at least one guaranteed)
+    arts_for_person = all_arts.sample(rand(1..3))
+    arts_for_person.each do |art|
+      Rank.create!(belt: art.belts.sample, person: person)
+    end
+  end
+end
+
+puts "Seeded:"
+puts "  #{Art.count} arts"
+puts "  #{Belt.count} belts"
+puts "  #{Course.count} courses"
+puts "  #{Family.count} families"
+puts "  #{Person.count} people"
+puts "  #{Rank.count} ranks"

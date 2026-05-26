@@ -22,13 +22,13 @@ class FamiliesTest < ApplicationSystemTestCase
     assert_current_path new_family_path
     assert_selector "h1", text: "New family"
 
-    family_params = attributes_for(:family)
+    name = "Family Name"
 
-    fill_in "Name", with: family_params[:name]
+    fill_in "Name", with: name
     click_on "Create Family"
 
     # put these first so we wait for the page to load before finding the id
-    assert_selector "h2", text: "The #{family_params[:name]} Family"
+    assert_selector "h2", text: "The #{name} Family"
     assert_selector "h3", text: "People in Family (0)"
     new_family_id = current_path.split("/").last.to_i
     new_family = Family.find(new_family_id)
@@ -44,13 +44,13 @@ class FamiliesTest < ApplicationSystemTestCase
     assert_current_path edit_family_path(@family)
     assert_selector "h1", text: "Editing family"
 
-    family_params = attributes_for(:family)
+    name = "New Name"
 
-    fill_in "Name", with: family_params[:name]
+    fill_in "Name", with: name
     click_on "Update Family"
 
     assert_current_path family_path(@family)
-    assert_selector "h2", text: "The #{family_params[:name]} Family"
+    assert_selector "h2", text: "The #{name} Family"
     assert_link "Edit", href: edit_family_path(@family)
     assert_link "Back to families", href: families_path
   end

@@ -23,14 +23,16 @@ class ArtsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "New art"
     assert_link "Back to arts", href: arts_path
 
-    art_params = attributes_for(:art)
+    name = "Art Name"
+    abbrev = "AN"
 
-    fill_in "Name", with: art_params[:name]
-    fill_in "Abbrev", with: art_params[:abbrev]
+    fill_in "Name", with: name
+    fill_in "Abbrev", with: abbrev
     click_on "Create Art"
 
-    # put these first so we wait for the page to load before finding the id
-    assert_selector "h2", text: "#{art_params[:name]} (#{art_params[:abbrev]})"
+    # try to get the page to load before doing other things
+    assert_text "#{name} was successfully created"
+    assert_selector "h2", text: "#{name} (#{abbrev})"
     assert_selector "h3", text: "Courses (0)"
     assert_selector "h3", text: "Belts (0)"
     new_art_id = current_path.split("/").last.to_i
@@ -50,14 +52,15 @@ class ArtsTest < ApplicationSystemTestCase
     assert_link "Show this art", href: art_path(@art)
     assert_link "Back to arts", href: arts_path
 
-    art_params = attributes_for(:art)
+    name = "New Name"
+    abbrev = "NN"
 
-    fill_in "Name", with: art_params[:name]
-    fill_in "Abbrev", with: art_params[:abbrev]
+    fill_in "Name", with: name
+    fill_in "Abbrev", with: abbrev
     click_on "Update Art"
 
     assert_current_path art_path(@art)
-    assert_selector "h2", text: "#{art_params[:name]} (#{art_params[:abbrev]})"
+    assert_selector "h2", text: "#{name} (#{abbrev})"
     assert_link "Edit", href: edit_art_path(@art)
     assert_link "Back to arts", href: arts_path
   end
@@ -82,10 +85,7 @@ class ArtsTest < ApplicationSystemTestCase
 
     assert_current_path art_path(@art)
     assert_selector "h3", text: "Courses (1)"
-    assert_text course.day
-    assert_text course.time.strftime("%I:%M %p")
-    assert_link "Show", href: art_course_path(@art, course)
-    assert_link "Edit", href: edit_art_course_path(@art, course)
+    assert_link course, href: art_course_path(@art, course)
   end
 
   test "show page renders nested belts" do

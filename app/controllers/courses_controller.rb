@@ -1,10 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_art
-  before_action :set_course, except: %i[ new create index ]
-
-  def index
-    @courses = @art.courses
-  end
+  before_action :set_course, except: %i[ new create ]
 
   def show
   end
@@ -38,10 +34,6 @@ class CoursesController < ApplicationController
     @course.destroy
 
     redirect_to @art, notice: "Course was successfully destroyed."
-  end
-
-  # attendance for one class meeting
-  def attendance
   end
 
   private

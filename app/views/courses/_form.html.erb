@@ -17,7 +17,7 @@
 
   <div>
     <%= form.label :day, style: "display: block" %>
-    <%= form.collection_select :day, Date::DAYNAMES, :to_s, :to_s, include_blank: false %>
+    <%= form.select :day, Course.days.keys.map { |d| [d.humanize, d] }, include_blank: false %>
   </div>
 
   <div>
