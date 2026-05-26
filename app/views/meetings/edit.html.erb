@@ -1,0 +1,10 @@
+<h1>Edit meeting for <%= @art.name %></h1>
+<h2><%= @meeting.date %> <%= @course %></h2>
+
+<%= render "form", meeting: @meeting %>
+
+<br>
+
+<div>
+  <%= link_to "Back to course", [@art, @course] %>
+</div>

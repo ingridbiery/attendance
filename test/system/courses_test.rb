@@ -7,25 +7,10 @@ class CoursesTest < ApplicationSystemTestCase
     @course = create(:course, art: @art)
   end
 
-  test "visiting the index" do
-    visit art_courses_url(@art)
-
-    assert_current_path art_courses_path(@art)
-    assert_selector "h1", text: "Courses"
-    assert_text @course.day.humanize
-    assert_text @course.time.strftime("%I:%M %p")
-    assert_link "Add", href: new_art_course_path(@art)
-    assert_link "Show this course", href: art_course_path(@art, @course)
-    assert_link "New", href: new_art_course_meeting_path(@art, @course)
-    assert_link "Show", href: art_course_path(@art, @course)
-    assert_link "Edit", href: edit_art_course_path(@art, @course)
-    assert_link "Back to art", href: art_path(@art)
-  end
-
   test "creating a course" do
-    visit art_courses_url(@art)
+    visit art_url(@art)
 
-    within("#add-course") do
+    within("#courses") do
       click_on "Add"
     end
 
@@ -92,14 +77,6 @@ class CoursesTest < ApplicationSystemTestCase
     assert_selector "h3", text: "Meetings (1)"
     assert_text meeting.date.to_s
     assert_link meeting.date.to_s, href: art_course_meeting_path(@art, @course, meeting)
-  end
-
-  test "index page shows new meeting link" do
-    visit art_courses_url(@art)
-
-    within("#courses") do
-      assert_link "New", href: new_art_course_meeting_path(@art, @course)
-    end
   end
 
   test "day dropdown shows humanized day names" do

@@ -9,21 +9,21 @@ class MeetingsTest < ApplicationSystemTestCase
   end
 
   test "creating a meeting" do
-    visit art_courses_url(@art)
+    visit art_course_url(@art, @course)
 
-    click_link "New", href: new_art_course_meeting_path(@art, @course)
+    click_link "Add", href: new_art_course_meeting_path(@art, @course)
 
     assert_current_path new_art_course_meeting_path(@art, @course)
     assert_selector "h1", text: "New meeting for #{@art.abbrev} #{@course.day.humanize}"
     assert_link "Back to course", href: art_course_path(@art, @course)
 
-    date = Date.today()
+    date = Date.today()-1
 
     find("#meeting_date").send_keys(date.strftime("%m%d%Y"))
-    click_on "Create Meeting"
+    click_on "Save Attendance"
 
     # wait for redirect before reading path
-    assert_selector "h2", text: date.to_s
+    assert_selector "h2", text: "#{date} #{@course}"
     new_meeting_id = current_path.match(/\/meetings\/(\d+)/)[1].to_i
     new_meeting = Meeting.find(new_meeting_id)
     assert_current_path art_course_meeting_path(@art, @course, new_meeting)
@@ -36,7 +36,7 @@ class MeetingsTest < ApplicationSystemTestCase
     # clear date (it defaults to today)
     fill_in "Date", with: ""
 
-    click_on "Create Meeting"
+    click_on "Save Attendance"
 
     assert_text "Date can't be blank"
     assert_selector "form"

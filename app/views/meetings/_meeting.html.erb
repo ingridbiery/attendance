@@ -1,1 +1,9 @@
-<li><%= link_to meeting.date, art_course_meeting_path(@art, course, meeting) %></li>
+<h1><%= art.name %></h1>
+<h2><%= meeting.date %> <%= course %></h2>
+<% if @attended.present? %>
+  <ul>
+    <% @attended.each do |person| %>
+      <li class="belt-<%= person.belt_for(@art)&.color %>"><%= person.name %></li>
+    <% end %>
+  </ul>
+<% end %>

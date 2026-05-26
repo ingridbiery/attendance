@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :arts do
     resources :belts, except: :index
-    resources :courses do
-      resources :meetings, only: [:new, :create, :show, :destroy]
+    resources :courses, except: :index do
+      resources :meetings, except: :index
     end
   end
 

@@ -16,7 +16,55 @@
     <%= form.date_field :date, value: @date %>
   </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+  <% if @attended.any? %>
+    <h3>Attended</h3>
+    <ul>
+      <% @attended.each do |person| %>
+        <li>
+          <label class="belt-<%= person.belt_for(@art)&.color %>">
+            <input type="checkbox" name="person_ids[]" value="<%= person.id %>" checked>
+            <%= person.name %>
+          </label>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @attended_last.any? %>
+    <h3>Attended Last Time</h3>
+    <ul>
+      <% @attended_last.each do |person| %>
+        <li>
+          <label class="belt-<%= person.belt_for(@art)&.color %>">
+            <input type="checkbox" name="person_ids[]" value="<%= person.id %>" checked>
+            <%= person.name %>
+          </label>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @others.any? %>
+    <h3>Others</h3>
+    <ul>
+      <% @others.each do |person| %>
+        <li>
+          <label class="belt-<%= person.belt_for(@art)&.color %>">
+            <input type="checkbox" name="person_ids[]" value="<%= person.id %>">
+            <%= person.name %>
+          </label>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form.submit "Save Attendance" %>
 <% end %>
+
+<div>
+  <%= link_to "Back to course", [@art, @course] %>
+
+  <%= button_to "Destroy this meeting", [@art, @course, @meeting],
+    method: :delete,
+    data: { turbo_confirm: "Are you sure?" } %>
+</div>

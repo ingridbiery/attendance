@@ -13,7 +13,7 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create meeting" do
-    meeting_params = attributes_for(:meeting, art: @art, course: @course)
+    meeting_params = { date: Date.today-1 }
 
     assert_difference("Meeting.count") do
       post art_course_meetings_url(@art, @course), params: {
@@ -21,7 +21,8 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_redirected_to art_course_meeting_url(@art, @course, Meeting.last)
+    new_meeting = Meeting.find_by(date: meeting_params[:date], course: @course)
+    assert_redirected_to art_course_meeting_url(@art, @course, new_meeting)
   end
 
   test "should show meeting" do

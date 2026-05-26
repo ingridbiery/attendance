@@ -6,11 +6,6 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
     @course = create(:course, art: @art)
   end
 
-  test "should get index" do
-    get art_courses_url(@art)
-    assert_response :success
-  end
-
   test "should get new" do
     get new_art_course_url(@art)
     assert_response :success

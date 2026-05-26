@@ -1,6 +1,7 @@
-<h2><%= @meeting.date %></h2>
+<%= render @meeting, art: @art, course: @course %>
 
 <div>
+  <%= link_to "Edit", edit_art_course_meeting_path(@art, @course, @meeting) %> |
   <%= link_to "Back to course", [@art, @course] %>
 
   <%= button_to "Destroy this meeting", [@art, @course, @meeting],

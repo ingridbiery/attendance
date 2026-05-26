@@ -19,4 +19,8 @@ class Person < ApplicationRecord
   def name
     "#{first_name} #{last_name}"
   end
+
+  def belt_for(art)
+    ranks.joins(:belt).where(belts: { art: art }).order("belts.level DESC").first&.belt
+  end
 end
