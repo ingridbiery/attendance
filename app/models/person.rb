@@ -5,6 +5,8 @@ class Person < ApplicationRecord
   has_many :belts, through: :ranks
   has_many :arts, through: :belts
   has_many :attendances, dependent: :destroy
+  has_many :enrollments, dependent: :destroy
+  has_many :enrolled_arts, through: :enrollments, source: :art
 
   validates :first_name, presence: true,
                          length: { maximum: 30 }

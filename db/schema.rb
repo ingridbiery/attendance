@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_05_25_132947) do
+ActiveRecord::Schema[7.0].define(version: 2026_05_27_195818) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,16 @@ ActiveRecord::Schema[7.0].define(version: 2026_05_25_132947) do
     t.index ["art_id"], name: "index_courses_on_art_id"
   end
 
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.bigint "art_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["art_id"], name: "index_enrollments_on_art_id"
+    t.index ["person_id", "art_id"], name: "index_enrollments_on_person_id_and_art_id", unique: true
+    t.index ["person_id"], name: "index_enrollments_on_person_id"
+  end
+
   create_table "families", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -62,6 +72,18 @@ ActiveRecord::Schema[7.0].define(version: 2026_05_25_132947) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_meetings_on_course_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.bigint "family_id", null: false
+    t.bigint "art_id", null: false
+    t.date "paid_until"
+    t.integer "plan_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["art_id"], name: "index_payments_on_art_id"
+    t.index ["family_id", "art_id"], name: "index_payments_on_family_id_and_art_id", unique: true
+    t.index ["family_id"], name: "index_payments_on_family_id"
   end
 
   create_table "people", force: :cascade do |t|
@@ -86,7 +108,11 @@ ActiveRecord::Schema[7.0].define(version: 2026_05_25_132947) do
   add_foreign_key "attendances", "meetings"
   add_foreign_key "attendances", "people"
   add_foreign_key "courses", "arts"
+  add_foreign_key "enrollments", "arts"
+  add_foreign_key "enrollments", "people"
   add_foreign_key "meetings", "courses"
+  add_foreign_key "payments", "arts"
+  add_foreign_key "payments", "families"
   add_foreign_key "ranks", "belts"
   add_foreign_key "ranks", "people"
 end

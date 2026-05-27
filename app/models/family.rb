@@ -1,5 +1,6 @@
 class Family < ApplicationRecord
   has_many :people, dependent: :destroy
+  has_many :payments, dependent: :destroy
 
   LEGAL_CHARS = /\A[\p{L}\p{M} \-\.\/'\u2019]*\z/
   LEGAL_CHARS_MSG = "contains invalid characters. Valid characters: letters, space, apostrophe, period, dash, slash."
