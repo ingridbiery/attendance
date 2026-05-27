@@ -4,6 +4,7 @@ class Belt < ApplicationRecord
   has_many :ranks, dependent: :destroy
   has_many :people, through: :ranks
 
-  validates :name, presence: true
+  validates :name, presence: true,
+                   length: { maximum: 50 }
   validates :level, presence: true
 end

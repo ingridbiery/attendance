@@ -13,4 +13,10 @@ class CourseTest < ActiveSupport::TestCase
     @course.art = nil
     assert_not @course.valid?
   end
+
+  test "destroy dependents" do
+    create(:meeting, course: @course)
+    @course.destroy
+    assert_empty Meeting.where(course_id: @course.id)
+  end
 end

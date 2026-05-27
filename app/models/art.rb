@@ -7,5 +7,6 @@ class Art < ApplicationRecord
   validates :name, presence: true,
                    uniqueness: { case_sensitive: false },
                    length: { maximum: 50 }
-  validates :abbrev, presence: true
+  validates :abbrev, presence: true,
+                     length: { maximum: 5 }
 end

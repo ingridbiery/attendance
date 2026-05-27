@@ -14,6 +14,12 @@ class BeltTest < ActiveSupport::TestCase
     assert_not @belt.valid?
   end
 
+  test "name max length" do
+    @belt.name = "a" * 51
+    assert_not @belt.valid?
+  end
+
+
   test "requires level" do
     @belt.level = nil
     assert_not @belt.valid?
@@ -24,12 +30,9 @@ class BeltTest < ActiveSupport::TestCase
     assert_not @belt.valid?
   end
 
-  test "dependent destroy ranks" do
-    belt = create(:belt)
-    rank = create(:rank, belt: belt)
-
-    assert_difference("Rank.count", -1) do
-      belt.destroy
-    end
+  test "destroy dependents" do
+    create(:rank, belt: @belt)
+    @belt.destroy
+    assert_empty Rank.where(belt_id: @belt.id)
   end
 end

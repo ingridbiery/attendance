@@ -24,9 +24,20 @@ class ArtTest < ActiveSupport::TestCase
     assert_not @art.valid?
   end
 
+  test "abbrev max length" do
+    @art.abbrev = "a" * 6
+    assert_not @art.valid?
+  end
+
   test "name unique case insensitive" do
     create(:art, name: "Karate")
     dup = build(:art, name: "karate")
     assert_not dup.valid?
+  end
+
+  test "destroy dependents" do
+    create(:belt, art: @art)
+    @art.destroy
+    assert_empty Belt.where(art_id: @art.id)
   end
 end

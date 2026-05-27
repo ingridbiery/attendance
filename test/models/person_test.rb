@@ -19,14 +19,24 @@ class PersonTest < ActiveSupport::TestCase
     assert_not @person.valid?
   end
 
-  test "requires family" do
-    @person.family = nil
-    assert_not @person.valid?
+  test "name must be unique per family" do
+    person = create(:person, first_name: @person.first_name.upcase)
+    dup = build(:person, first_name: person.first_name.downcase, last_name: person.last_name,
+                 family: person.family)
+    assert_not dup.valid?
   end
 
-  test "unique first_name scoped to last_name" do
-    create(:person, first_name: "Ingrid", last_name: "Biery")
-    dup = build(:person, first_name: "Ingrid", last_name: "Biery")
-    assert_not dup.valid?
+  test "same name different family is valid" do
+    person = create(:person)
+    family = create(:family)
+    dup = build(:person, family: family, first_name: person.first_name,
+                last_name: person.last_name)
+    assert dup.valid?
+  end
+
+  test "destroy dependents" do
+    create(:attendance, person: @person)
+    @person.destroy
+    assert_empty Attendance.where(person_id: @person.id)
   end
 end

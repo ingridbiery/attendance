@@ -11,9 +11,7 @@ class Person < ApplicationRecord
   validates :last_name, presence: true,
                         length: { maximum: 30 }
 
-  validates_uniqueness_of :first_name,
-                          scope: :last_name,
-                          message: "with same last name is already in the system."
+  validate :unique_name_per_family
 
   # get the full name for this person
   def name
@@ -23,4 +21,12 @@ class Person < ApplicationRecord
   def belt_for(art)
     ranks.joins(:belt).where(belts: { art: art }).order("belts.level DESC").first&.belt
   end
+
+  private
+    def unique_name_per_family
+      duplicate = Person.where("LOWER(first_name) = ? AND LOWER(last_name) = ? AND family_id = ?",
+                               first_name.downcase, last_name.downcase, family_id)
+      duplicate = duplicate.where.not(id: id) if persisted?
+      errors.add(:base, "already has a person with this name") if duplicate.exists?
+    end
 end
