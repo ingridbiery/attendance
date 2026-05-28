@@ -55,23 +55,9 @@ class MeetingsController < ApplicationController
   private
     # get all of the data we need to fill the view
     def load_attendance_data
-      people = @art.people.select("people.*, belts.level").distinct
-                   .order("belts.level, last_name, first_name")
-      
-      current_attendees = if @meeting.persisted?
-                            @meeting.people.pluck(:id)
-                          else
-                            (params[:person_ids] || []).map(&:to_i)
-                          end
-      
-      previous_meeting = @course.meetings.where("date < ?", @meeting.date).order(:date).last
-      previous_attendees = previous_meeting&.people&.pluck(:id) || []
-      
-      @attended = people.select { |p| current_attendees.include?(p.id) }
-      @attended_last = people.select { |p| previous_attendees.include?(p.id) &&
-                                           !current_attendees.include?(p.id) }
-      @others = people.select { |p| !previous_attendees.include?(p.id) &&
-                                    !current_attendees.include?(p.id) }
+      @attended = @meeting.attended(params[:people_ids])
+      @attended_last = @meeting.attended_previous - @attended
+      @others = @meeting.eligible_people - @attended - @attended_last
     end
     
     # create the actual attendances

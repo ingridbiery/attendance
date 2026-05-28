@@ -19,9 +19,23 @@ class BeltTest < ActiveSupport::TestCase
     assert_not @belt.valid?
   end
 
-
   test "requires level" do
     @belt.level = nil
+    assert_not @belt.valid?
+  end
+
+  test "blank image allowed" do
+    @belt.img = ""
+    assert @belt.valid?
+  end
+
+  test "existing image allowed" do
+    @belt.img = "test.png"
+    assert @belt.valid?
+  end
+
+  test "non-existent image not allowed" do
+    @belt.img = "missing.png"
     assert_not @belt.valid?
   end
 
