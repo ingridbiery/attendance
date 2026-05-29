@@ -1,7 +1,6 @@
 class Payment < ApplicationRecord
   belongs_to :family
   belongs_to :art
-  belongs_to :person, optional: true
 
   enum :plan_type, {
     one_person_once: 0,

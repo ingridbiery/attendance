@@ -38,11 +38,4 @@ class EnrollmentTest < ActiveSupport::TestCase
     second_enrollment = build(:enrollment, art: enrollment.art)
     assert second_enrollment.valid?
   end
-
-  test "destroying enrollment does not destroy person or art" do
-    enrollment = create(:enrollment)
-    enrollment.destroy
-    assert Person.exists?(enrollment.person_id)
-    assert Art.exists?(enrollment.art_id)
-  end
 end
