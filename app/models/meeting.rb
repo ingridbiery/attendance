@@ -9,11 +9,18 @@ class Meeting < ApplicationRecord
 
   self.implicit_order_column = { date: :desc }
 
-  # return the list of people who have attended this class if it's been saved
-  # return the people associated with the passed in ids if it has not been saved
-  def attended(people_ids = nil)
+  # people sorted by belt level in this art (can't do this for the people automatically because
+  # that would require a join, and that makes duplicates. SQL won't dedupe without changing the sort)
+  def sorted_people
+    people.sort_by do |p|
+      level = p.belts.where(art_id: art.id).maximum(:level) [-level, p.last_name, p.first_name]
+    end
+  end
+
+  # people who are already signed up or people who will be signed up once the meeting is saved
+  def selected_people(people_ids = nil)
     if persisted?
-      people
+      sorted_people
     else 
       ids = Array(people_ids).map(&:to_i)
       art.people.select { |p| ids.include?(p.id) }
@@ -22,7 +29,7 @@ class Meeting < ApplicationRecord
 
   def attended_previous
     return [] unless previous
-    previous.attended
+    previous.selected_people
   end
 
   # return the meeting immediately before this one

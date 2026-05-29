@@ -5,11 +5,7 @@ class MeetingsController < ApplicationController
   
   def show
     # who attended this meeting already
-    @attended = @meeting.people.joins(ranks: :belt)
-                        .where(belts: { art: @art })
-                        .select("people.*, belts.level")
-                        .order("belts.level DESC, last_name, first_name")
-                        .distinct
+    @attended = @meeting.sorted_people
   end
   
   def new
@@ -55,7 +51,7 @@ class MeetingsController < ApplicationController
   private
     # get all of the data we need to fill the view
     def load_attendance_data
-      @attended = @meeting.attended(params[:people_ids])
+      @attended = @meeting.selected_people(params[:people_ids])
       @attended_last = @meeting.attended_previous - @attended
       @others = @meeting.eligible_people - @attended - @attended_last
     end
