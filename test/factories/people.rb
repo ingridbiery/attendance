@@ -1,9 +1,17 @@
 FactoryBot.define do
   factory :person do
-    association :family
-
+    family
     first_name { Faker::Name.first_name }
     last_name  { Faker::Name.last_name }
     dob        { Faker::Date.birthday(min_age: 5, max_age: 80) }
+
+    after(:create) do |person|
+      arts = Art.all
+      next if arts.empty?
+
+      arts.sample(rand(1..3)).each do |art|
+        Rank.create!(person: person, belt: art.belts.sample)
+      end
+    end
   end
 end

@@ -3,7 +3,7 @@ FactoryBot.define do
     name { Faker::Lorem.unique.word.capitalize }
     level  { Faker::Number.non_zero_digit.to_i }
     color { Faker::Color.color_name }
-    association :art
+    art
 
     # Default: no image
     img { nil }
