@@ -36,8 +36,18 @@ class ArtTest < ActiveSupport::TestCase
   end
 
   test "destroy dependents" do
-    create(:belt, art: @art)
+    @art.save
+
+    belt = create(:belt, art: @art)
+    course = create(:course, art: @art)
+    enrollment = create(:enrollment, art: @art)
+    payment = create(:payment, art: @art)
+
     @art.destroy
-    assert_empty Belt.where(art_id: @art.id)
+
+    assert_not belt.exists?(belt.id)
+    assert_not course.exists?(course.id)
+    assert_not enrollment.exists?(enrollment.id)
+    assert_not payment.exists?(payment.id)
   end
 end

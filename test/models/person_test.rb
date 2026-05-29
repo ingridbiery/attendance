@@ -35,8 +35,16 @@ class PersonTest < ActiveSupport::TestCase
   end
 
   test "destroy dependents" do
-    create(:attendance, person: @person)
-    @person.destroy
-    assert_empty Attendance.where(person_id: @person.id)
+    @person.save
+    
+    rank = create(:rank, person: person)
+    attendance = create(:attendance, person: person)
+    enrollment = create(:enrollment, person: person)
+
+    person.destroy
+
+    assert_not Rank.exists?(rank.id)
+    assert_not Attendance.exists?(attendance.id)
+    assert_not Enrollment.exists?(enrollment.id)
   end
 end

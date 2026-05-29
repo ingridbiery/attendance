@@ -45,8 +45,12 @@ class BeltTest < ActiveSupport::TestCase
   end
 
   test "destroy dependents" do
-    create(:rank, belt: @belt)
+    @belt.save
+
+    rank = create(:rank, belt: @belt)
+
     @belt.destroy
-    assert_empty Rank.where(belt_id: @belt.id)
+
+    assert_not rank.exists?(rank.id)
   end
 end

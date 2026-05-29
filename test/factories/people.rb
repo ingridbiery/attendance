@@ -6,7 +6,7 @@ FactoryBot.define do
     dob        { Faker::Date.birthday(min_age: 5, max_age: 80) }
 
     after(:create) do |person|
-      arts = Art.all
+      arts = Art.includes(:belts).select { |a| a.belts.any? }
       next if arts.empty?
 
       arts.sample(rand(1..3)).each do |art|

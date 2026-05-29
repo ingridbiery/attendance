@@ -43,8 +43,13 @@ class FamilyTest < ActiveSupport::TestCase
 
   test "destroy dependents" do
     @family.save
-    create(:person, family: @family)
+
+    person = create(:person, family: @family)
+    payment = create(:payment, family: @family)
+
     @family.destroy
-    assert_empty Person.where(family_id: @family.id)
+
+    assert_not person.exists?(person.id)
+    assert_not payment.exists?(payment.id)
   end
 end

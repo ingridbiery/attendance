@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :meeting do
     course
-    art { course.art }
+    art
 
     date do
       base = Faker::Date.backward(days: 60)

@@ -23,8 +23,12 @@ class MeetingTest < ActiveSupport::TestCase
   end
 
   test "destroy dependents" do
-    create(:attendance, meeting: @meeting)
+    @meeting.save
+
+    attendance = create(:attendance, meeting: @meeting)
+
     @meeting.destroy
-    assert_empty Attendance.where(meeting_id: @meeting.id)
+
+    assert_not attendance.exists?(attendance.id)
   end
 end
